@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {HomepageComponent} from "./homepage/homepage.component";
 import {ProductPageComponent} from "./product-page/product-page.component";
+import {LoginPageComponent} from "./login-page/login-page.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
-  {path: 'product/:id', component: ProductPageComponent}
+  {path: 'product/:id', component: ProductPageComponent},
+  {path: 'login', component: LoginPageComponent}
 ]
 
 
