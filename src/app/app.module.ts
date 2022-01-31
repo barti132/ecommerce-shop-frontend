@@ -9,6 +9,8 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { CategoryPageComponent } from './category-page/category-page.component';
+import { ProductListPageComponent } from './product-list-page/product-list-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     FooterComponent,
     NavbarComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    CategoryPageComponent,
+    ProductListPageComponent
   ],
   imports: [
     BrowserModule,
