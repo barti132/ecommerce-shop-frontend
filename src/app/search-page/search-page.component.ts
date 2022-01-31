@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ProductService} from "../services/product.service";
+import {Product} from "../models/product.model";
 
 @Component({
   selector: 'app-search-page',
@@ -8,10 +10,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SearchPageComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  products: Product[] = [];
 
-  ngOnInit(): void {
-
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService) {
   }
 
+  ngOnInit(): void {
+    this.route.params.subscribe((routeParams) => {
+      this.findProducts(routeParams['category'], routeParams['product']);
+    });
+  }
+
+  private findProducts(category: string, product: string) {
+    this.productService.searchProducts(category, product).subscribe((products) => {
+        this.products = products;
+        console.log(products)
+      });
+  }
 }
