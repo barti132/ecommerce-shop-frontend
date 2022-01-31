@@ -11,6 +11,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { CategoryPageComponent } from './category-page/category-page.component';
 import { ProductListPageComponent } from './product-list-page/product-list-page.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ProductListPageComponent } from './product-list-page/product-list-page.
     LoginPageComponent,
     RegisterPageComponent,
     CategoryPageComponent,
-    ProductListPageComponent
+    ProductListPageComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
