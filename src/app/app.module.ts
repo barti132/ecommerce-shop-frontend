@@ -12,6 +12,8 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { CategoryPageComponent } from './category-page/category-page.component';
 import { ProductListPageComponent } from './product-list-page/product-list-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { SearchPageComponent } from './search-page/search-page.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

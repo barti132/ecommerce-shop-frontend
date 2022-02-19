@@ -6,10 +6,10 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <form class="d-flex bg-light input-group w-50 mx-auto rounded">
-        <input class="form-control w-25" type="search" placeholder="Search" aria-label="Search">
-        <select class="form-select form-select-sm" aria-label="Select category">
-          <option value="any" selected>Anywhere</option>
+      <form class="d-flex bg-light input-group w-50 mx-auto rounded" #searchForm="ngForm" (ngSubmit)="search(searchForm)">
+        <input class="form-control w-25" type="search" placeholder="Search" aria-label="Search" id="var" name="var" ngModel>
+        <select class="form-select form-select-sm" aria-label="Select category" id="category" name="category" ngModel="any">
+          <option value="any">Anywhere</option>
           <option value="Laptops & PCs">Laptops & PCs</option>
           <option value="Smartphones & Readers">Smartphones & Readers</option>
           <option value="Gaming & Streaming">Gaming & Streaming</option>
