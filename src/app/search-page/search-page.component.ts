@@ -28,7 +28,6 @@ export class SearchPageComponent implements OnInit {
   private findProducts(category: string, product: string) {
     this.productService.searchProducts(category, product).subscribe((products) => {
         this.products = products;
-        console.log(products)
       });
   }
 

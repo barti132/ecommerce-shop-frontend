@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterPageComponent},
   {path: 'category/:category', component: CategoryPageComponent},
   {path: 'category/:category/subcategory/:subcategory', component: ProductListPageComponent},
-  {path: 'category/:category/subcategory/:subcategory/product/:id', component: ProductPageComponent},
+  {path: 'product/:id', component: ProductPageComponent},
   {path: 'search/:category/:product', component: SearchPageComponent}
 ]
 
