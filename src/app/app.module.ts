@@ -5,12 +5,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProductPageComponent } from './product-page/product-page.component';
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './page-elements/footer/footer.component';
+import { NavbarComponent } from './page-elements/navbar/navbar.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { CategoryPageComponent } from './category-page/category-page.component';
-import { ProductListPageComponent } from './product-list-page/product-list-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
@@ -25,7 +24,6 @@ import {HttpClientModule} from "@angular/common/http";
     LoginPageComponent,
     RegisterPageComponent,
     CategoryPageComponent,
-    ProductListPageComponent,
     SearchPageComponent
   ],
   imports: [

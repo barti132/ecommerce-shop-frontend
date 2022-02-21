@@ -1,9 +1,11 @@
 export interface Product {
-  id_product: number,
+  id: number,
   category: string,
   sub_category: string,
   producer_name: string,
   name: string,
   description: string,
-  img: string
+  img: string,
+  price_net: number,
+  price_gross: number
 }
