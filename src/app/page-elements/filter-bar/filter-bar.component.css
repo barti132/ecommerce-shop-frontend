@@ -50,6 +50,10 @@ input[type="submit"] {
   box-shadow: none
 }
 
+.show-btn {
+  float: right;
+}
+
 .box-label {
   color: #11698e;
   font-size: 0.9rem;

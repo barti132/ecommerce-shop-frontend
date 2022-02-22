@@ -11,12 +11,19 @@ export class ProductsListComponent implements OnInit {
 
   @Input() products: Product[] = [];
 
+  displayFormat = true;
+
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
   }
 
-  public getSantizeUrl(url : string) {
+  public getSanitizeUrl(url : string) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
+
+  changeDisplayFormat(format: boolean){
+    this.displayFormat = format;
+  }
+
 }
