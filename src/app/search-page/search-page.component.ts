@@ -11,6 +11,7 @@ import {Product} from "../models/product.model";
 export class SearchPageComponent implements OnInit {
 
   products: Product[] = [];
+  producers: String[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +27,12 @@ export class SearchPageComponent implements OnInit {
   private findProducts(category: string, product: string) {
     this.productService.searchProducts(category, product).subscribe((products) => {
       this.products = products;
+
+      let set = new Set<String>();
+      for(let product of products){
+        set.add(product.producer_name);
+      }
+      this.producers = Array.from(set);
     });
   }
 }

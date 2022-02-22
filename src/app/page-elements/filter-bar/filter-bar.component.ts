@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {Product} from "../../models/product.model";
 
 @Component({
   selector: 'app-filter-bar',
@@ -7,6 +8,8 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./filter-bar.component.css']
 })
 export class FilterBarComponent implements OnInit {
+
+  @Input() producers: String[] = [];
 
   constructor(
     private route: ActivatedRoute

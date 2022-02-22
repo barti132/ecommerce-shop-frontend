@@ -11,6 +11,7 @@ import {Product} from "../models/product.model";
 export class CategoryPageComponent implements OnInit {
 
   products: Product[] = [];
+  producers: String[] = [];
   categoryName = "";
 
   constructor(
@@ -29,6 +30,12 @@ export class CategoryPageComponent implements OnInit {
     this.categoryName = category;
     this.productService.getProductByCategory(category).subscribe((products) => {
       this.products = products;
+
+      let set = new Set<String>();
+      for(let product of products){
+        set.add(product.producer_name);
+      }
+      this.producers = Array.from(set);
     });
   }
 

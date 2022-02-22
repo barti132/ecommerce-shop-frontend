@@ -7,27 +7,54 @@
                 aria-expanded="false" aria-controls="inner-box"><h6 class="bi bi-plus show-btn"></h6></button>
       </div>
       <div id="inner-box" class="collapse show">
-        <div class="my-1"><label class="tick">Less than 200 <input type="radio" name="price"> <span class="check"></span> </label>
+        <div class="my-1">
+          <label class="tick">Less than 200
+            <input type="radio" name="price">
+            <span class="check"></span>
+          </label>
         </div>
-        <div class="my-1"><label class="tick">200-400 <input type="radio" name="price"> <span class="check"></span> </label>
+        <div class="my-1">
+          <label class="tick">200-400
+            <input type="radio" name="price">
+            <span class="check"></span>
+          </label>
         </div>
-        <div class="my-1"><label class="tick">400-700 <input type="radio" name="price"> <span class="check"></span> </label>
+        <div class="my-1">
+          <label class="tick">400-700
+            <input type="radio" name="price">
+            <span class="check"></span>
+          </label>
         </div>
-        <div class="my-1"><label class="tick">700-1000 <input type="radio" name="price"> <span class="check"></span> </label>
+        <div class="my-1">
+          <label class="tick">700-1000
+            <input type="radio" name="price">
+            <span class="check"></span>
+          </label>
         </div>
-        <div class="my-1"><label class="tick">1000 and Above <input type="radio" name="price"> <span class="check"></span>
-        </label>
+        <div class="my-1">
+          <label class="tick">1000 and Above
+            <input type="radio" name="price">
+            <span class="check"></span>
+          </label>
         </div>
       </div>
     </div>
+
     <div class="box border-bottom">
       <div class="box-label text-uppercase d-flex align-items-center">Producer
         <button class="btn ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#property"
-                aria-expanded="false" aria-controls="property"><h6 class="bi bi-plus show-btn"></h6></button>
+                aria-expanded="false" aria-controls="property">
+          <h6 class="bi bi-plus show-btn"></h6>
+        </button>
       </div>
+
       <div id="property" class="collapse show">
-        <div class="my-1"><label class="tick">Intel <input type="radio" name="producer"> <span
-          class="check"></span> </label></div>
+        <div class="my-1" *ngFor="let producer of producers">
+          <label class="tick"> {{producer}}
+            <input type="radio" name="producer">
+            <span class="check"></span>
+          </label>
+        </div>
       </div>
     </div>
   </div>
