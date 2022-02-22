@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProductService} from "../services/product.service";
-import {DomSanitizer} from "@angular/platform-browser";
 import {Product} from "../models/product.model";
 
 @Component({
@@ -16,8 +15,8 @@ export class CategoryPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService,
-    private sanitizer: DomSanitizer) {
+    private productService: ProductService
+  ) {
   }
 
   ngOnInit(): void {
@@ -26,14 +25,11 @@ export class CategoryPageComponent implements OnInit {
     });
   }
 
-  private getProducts(category: string){
+  private getProducts(category: string) {
     this.categoryName = category;
     this.productService.getProductByCategory(category).subscribe((products) => {
       this.products = products;
     });
   }
 
-  public getSantizeUrl(url : string) {
-    return this.sanitizer.bypassSecurityTrustUrl(url);
-  }
 }

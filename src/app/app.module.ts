@@ -13,6 +13,8 @@ import { CategoryPageComponent } from './category-page/category-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { FilterBarComponent } from './page-elements/filter-bar/filter-bar.component';
+import { ProductsListComponent } from './page-elements/products-list/products-list.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {HttpClientModule} from "@angular/common/http";
     LoginPageComponent,
     RegisterPageComponent,
     CategoryPageComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    FilterBarComponent,
+    ProductsListComponent
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProductService} from "../services/product.service";
 import {Product} from "../models/product.model";
-import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-search-page',
@@ -15,8 +14,7 @@ export class SearchPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService,
-    private sanitizer: DomSanitizer) {
+    private productService: ProductService) {
   }
 
   ngOnInit(): void {
@@ -27,11 +25,7 @@ export class SearchPageComponent implements OnInit {
 
   private findProducts(category: string, product: string) {
     this.productService.searchProducts(category, product).subscribe((products) => {
-        this.products = products;
-      });
-  }
-
-  public getSantizeUrl(url : string) {
-    return this.sanitizer.bypassSecurityTrustUrl(url);
+      this.products = products;
+    });
   }
 }
