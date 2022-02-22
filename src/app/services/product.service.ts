@@ -13,7 +13,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   searchProducts(category: string, product: string): Observable<Product[]> {
-    return this.http.get<Product[]>(apiUrl + "products/search?category=" + category + "&name=" + product);
+    return this.http.get<Product[]>(apiUrl + "products?name=" + product + "&category=" + category);
   }
 
   getProduct(id: number): Observable<Product> {
@@ -22,5 +22,9 @@ export class ProductService {
 
   getRandomProducts(): Observable<Product[]>{
     return this.http.get<Product[]>(apiUrl + "products/random");
+  }
+
+  getProductByCategory(category: string): Observable<Product[]> {
+    return this.http.get<Product[]>(apiUrl + "products/category/" + category);
   }
 }
