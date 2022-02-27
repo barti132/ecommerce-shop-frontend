@@ -18,9 +18,19 @@
         </select>
         <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
       </form>
-      <a href="/login" class="btn btn-success ms-2">
-        Sign in
-      </a>
+      <div *ngIf="isLogged === false; else logged">
+        <a href="/login" class="btn btn-success ms-2">
+          Sign in
+        </a>
+      </div>
+      <ng-template #logged>
+        <a href="#"><i class="bi bi-cart display-6 me-2"></i></a>
+        <a href="/user"><i class="bi bi-person-circle display-6 me-2" style="color:white"></i></a>
+        <button (click)="logout()" class="btn btn-success ms-2">
+          Logout
+        </button>
+      </ng-template>
+
     </div>
   </div>
 </nav>

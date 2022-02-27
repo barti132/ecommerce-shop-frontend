@@ -28,13 +28,11 @@ export class AuthService {
       "lastName": form.value.lastName
     }
 
-    console.log(userData);
-
     return this.http.post(apiUrl + "auth/signup", userData, {responseType: 'text'});
   }
 
   login(form: NgForm): Observable<string>{
-    //"iss":"self","sub":"admin","exp":1645906648,"iat":1645905748,"scope":"admin""
+    //token data: "iss":"self","sub":"admin","exp":1645906648,"iat":1645905748,"scope":"admin""
 
     let cred = {
       "login": form.value.login,
@@ -56,5 +54,19 @@ export class AuthService {
         return "success";
       }),
       map((response) => {return "error: " + response;}));
+  }
+
+  logout(): void{
+    let logoutData = {
+      "refreshToken": this.storage.retrieve("refreshToken"),
+      "login": this.storage.retrieve("name")
+    }
+
+    this.http.post(apiUrl + "auth/logout", logoutData);
+
+    this.storage.clear("name");
+    this.storage.clear("role");
+    this.storage.clear("token");
+    this.storage.clear("refreshToken");
   }
 }

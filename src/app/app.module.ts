@@ -18,6 +18,7 @@ import {ProductsListComponent} from './page-elements/products-list/products-list
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {NgxWebstorageModule} from 'ngx-webstorage';
+import { UserPageComponent } from './user-page/user-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
     CategoryPageComponent,
     SearchPageComponent,
     FilterBarComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,

@@ -21,10 +21,10 @@ export class LoginPageComponent implements OnInit {
   signInUser(form: NgForm): void{
     this.authService.login(form).subscribe(
       (val) => {
-        this.toastr.success("Success!. Redirect to homepage in 5s.");
+        this.toastr.success("Success!");
         setTimeout(() => {
           this.router.navigate(['']);
-        }, 5000);
+        }, 500);
       },
       response => {
         this.toastr.error("Sign in fail. " + response);

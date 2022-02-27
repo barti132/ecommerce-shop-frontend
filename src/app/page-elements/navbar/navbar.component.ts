@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router"
+import {LocalStorageService} from "ngx-webstorage";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-navbar',
@@ -9,9 +11,17 @@ import {Router} from "@angular/router"
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  isLogged = false;
+
+  constructor(private router: Router, private storage: LocalStorageService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    if(this.storage.retrieve("token") == null){
+      this.isLogged = false;
+    }
+    else{
+      this.isLogged = true;
+    }
   }
 
   search(form: NgForm): void{
@@ -20,6 +30,11 @@ export class NavbarComponent implements OnInit {
 
     if(product != "")
       this.router.navigate(['/search/' + category + '/' + product]);
+  }
+
+  logout(): void{
+    this.authService.logout();
+    this.isLogged = false;
   }
 
 }

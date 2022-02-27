@@ -7,9 +7,11 @@ import {LoginPageComponent} from "./login-page/login-page.component";
 import {RegisterPageComponent} from "./register-page/register-page.component";
 import {CategoryPageComponent} from "./category-page/category-page.component";
 import {SearchPageComponent} from "./search-page/search-page.component";
+import {UserPageComponent} from "./user-page/user-page.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
+  {path: 'user', component: UserPageComponent},
   {path: 'login', component: LoginPageComponent},
   {path: 'register', component: RegisterPageComponent},
   {path: 'category/:category', component: CategoryPageComponent},
