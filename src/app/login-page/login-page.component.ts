@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
+import {NgForm} from "@angular/forms";
+import {AuthService} from "../services/auth.service";
+import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -9,9 +13,22 @@ import { ViewEncapsulation } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  signInUser(form: NgForm): void{
+    this.authService.login(form).subscribe(
+      (val) => {
+        this.toastr.success("Success!. Redirect to homepage in 5s.");
+        setTimeout(() => {
+          this.router.navigate(['']);
+        }, 5000);
+      },
+      response => {
+        this.toastr.error("Sign in fail. " + response);
+      });
   }
 
 }

@@ -17,6 +17,7 @@ import {FilterBarComponent} from './page-elements/filter-bar/filter-bar.componen
 import {ProductsListComponent} from './page-elements/products-list/products-list.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import {NgxWebstorageModule} from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {ToastrModule} from "ngx-toastr";
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxWebstorageModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
