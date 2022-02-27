@@ -20,7 +20,7 @@ export class AuthService {
   constructor(private http: HttpClient, private storage: LocalStorageService) { }
 
   registerUser(form: NgForm): Observable<Object>{
-    let userData = {
+    let userSignUp = {
       "email": form.value.email,
       "login": form.value.login,
       "password": form.value.password,
@@ -28,7 +28,7 @@ export class AuthService {
       "lastName": form.value.lastName
     }
 
-    return this.http.post(apiUrl + "auth/signup", userData, {responseType: 'text'});
+    return this.http.post(apiUrl + "auth/signup", userSignUp, {responseType: 'text'});
   }
 
   login(form: NgForm): Observable<string>{
