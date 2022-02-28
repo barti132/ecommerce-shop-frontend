@@ -13,15 +13,10 @@ export class NavbarComponent implements OnInit {
 
   isLogged = false;
 
-  constructor(private router: Router, private storage: LocalStorageService, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
-    if(this.storage.retrieve("token") == null){
-      this.isLogged = false;
-    }
-    else{
-      this.isLogged = true;
-    }
+    this.isLogged = this.authService.isLoggedIn();
   }
 
   search(form: NgForm): void{

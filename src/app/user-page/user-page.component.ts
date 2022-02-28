@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {UserData} from "../models/userData.model";
+import {UserService} from "../services/user.service";
+import {Address} from "../models/address.model";
 
 @Component({
   selector: 'app-user-page',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserPageComponent implements OnInit {
 
-  constructor() { }
+  userData: UserData = {
+    name: "",
+    lastName: "",
+    email: "",
+    login: "",
+    phoneNumber: "",
+    addresses: []
+  };
+
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.getDataAboutCurrentUser().subscribe(userData => this.userData = userData);
+
+  }
+
+  deleteAddress(id: number) {
+
   }
 
 }

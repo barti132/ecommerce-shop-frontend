@@ -12,13 +12,14 @@ import {RegisterPageComponent} from './register-page/register-page.component';
 import {CategoryPageComponent} from './category-page/category-page.component';
 import {SearchPageComponent} from './search-page/search-page.component';
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FilterBarComponent} from './page-elements/filter-bar/filter-bar.component';
 import {ProductsListComponent} from './page-elements/products-list/products-list.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import { UserPageComponent } from './user-page/user-page.component';
+import {TokenInterceptor} from "./token-interceptor";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { UserPageComponent } from './user-page/user-page.component';
     ToastrModule.forRoot(),
     NgxWebstorageModule.forRoot()
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

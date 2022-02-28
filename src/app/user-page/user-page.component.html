@@ -1,22 +1,70 @@
 <app-navbar></app-navbar>
 
-<div>
-  <h4>user data:</h4>
-  <ul>
-    <li>firstname</li>
-    <li>lastname</li>
-    <li>email</li>
-    <li>login</li>
-    <li>phone number</li>
-  </ul>
+<div class="row">
 
-  <h4>addresses:</h4>
-  <ul>
-    <li>address</li>
-    <li>city</li>
-    <li>country</li>
-    <li>postalcode</li>
-  </ul>
+  <div class="col-4 card ms-5 p-2">
+    <h4>Change basic user data</h4>
+    <form>
+      <div class="form-group">
+        <label for="name">First name</label>
+        <input type="text" class="form-control" id="name" name="name" ngModel="{{userData.name}}">
+      </div>
+      <div class="form-group">
+        <label for="lastname">Last name</label>
+        <input type="text" class="form-control" id="lastname" name="lastname" ngModel="{{userData.lastName}}">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" ngModel="{{userData.email}}">
+      </div>
+      <div class="form-group">
+        <label for="login">Login</label>
+        <input type="text" class="form-control" id="login" name="login" ngModel="{{userData.login}}">
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone number</label>
+        <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" ngModel="{{userData.phoneNumber}}">
+      </div>
+      <button class="btn btn-lg btn-primary mt-2" type="submit">Save</button>
+    </form>
+  </div>
+
+  <div class="col-4 card ms-5 p-2">
+    <h4>Change user password</h4>
+    <form>
+      <div class="form-group">
+        <label for="password">New password</label>
+        <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel">
+        <div *ngIf="password.invalid && (password.dirty || password.touched)"
+             class="alert alert-danger">
+
+          <div *ngIf="password.errors?.['required']">
+            Password is required.
+          </div>
+          <div *ngIf="password.errors?.['minlength']">
+            Password must be at least 4 characters long.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="passRep">Repeat new password</label>
+        <input type="password" class="form-control" id="passRep" name="passRep" ngModel>
+      </div>
+      <button class="btn btn-lg btn-primary mt-2" type="submit">Save</button>
+    </form>
+  </div>
+
+  <div class="col-3 card ms-5 mt-4 mb-5 p-2" *ngFor="let address of userData.addresses">
+    <h4>address:</h4>
+    <ul>
+      <li>{{address.country}}</li>
+      <li>{{address.city}}</li>
+      <li>{{address.postalCode}}</li>
+      <li>{{address.address}}</li>
+    </ul>
+    <button class="btn btn-lg btn-primary mt-2" (click)="deleteAddress(address.id)">Delete</button>
+  </div>
+
 
 </div>
 

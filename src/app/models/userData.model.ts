@@ -1,8 +1,8 @@
 import {Address} from "./address.model";
 
 export interface UserData{
-  firstname: string,
-  lastname: string,
+  name: string,
+  lastName: string,
   email: string,
   login: string,
   phoneNumber: string,
