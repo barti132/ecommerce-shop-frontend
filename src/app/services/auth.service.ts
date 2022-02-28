@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {map, Observable, tap} from "rxjs";
 import {LocalStorageService} from "ngx-webstorage";
 
-const apiUrl = 'http://localhost:8080/api/v1/';
+const apiUrl = 'http://localhost:8080/api/v1/auth/';
 
 
 interface authRespond {
@@ -33,7 +33,7 @@ export class AuthService {
       "lastName": form.value.lastName
     }
 
-    return this.http.post(apiUrl + "auth/signup", userSignUp, {responseType: 'text'});
+    return this.http.post(apiUrl + "signup", userSignUp, {responseType: 'text'});
   }
 
   login(form: NgForm): Observable<string>{
@@ -44,7 +44,7 @@ export class AuthService {
       "password": form.value.password
     }
 
-    return this.http.post<authRespond>(apiUrl + "auth/login", cred).pipe(map((val: authRespond) => {
+    return this.http.post<authRespond>(apiUrl + "login", cred).pipe(map((val: authRespond) => {
         let jwt = val.authenticationToken;
 
         let jwtData = jwt.split('.')[1]
@@ -80,7 +80,7 @@ export class AuthService {
       "refreshToken": this.getRefreshToken(),
       "login": this.getName()
     }
-    return this.http.post<refreshRespond>(apiUrl + "auth/refresh/token", refreshData).pipe(
+    return this.http.post<refreshRespond>(apiUrl + "refresh/token", refreshData).pipe(
       tap(respond => {
         this.storage.clear("token");
         this.storage.clear("refreshToken");

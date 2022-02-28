@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserData} from "../models/userData.model";
 import {UserService} from "../services/user.service";
-import {Address} from "../models/address.model";
+import {NgForm} from "@angular/forms";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-user-page',
@@ -19,15 +20,56 @@ export class UserPageComponent implements OnInit {
     addresses: []
   };
 
-  constructor(private userService: UserService) { }
+  createNewAddress = false;
+
+  constructor(private userService: UserService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.userService.getDataAboutCurrentUser().subscribe(userData => this.userData = userData);
+    this.loadUserData();
+  }
 
+  loadUserData(){
+    this.userService.getDataAboutCurrentUser().subscribe(userData => this.userData = userData);
   }
 
   deleteAddress(id: number) {
-
+    this.userService.deleteAddressById(id).subscribe(
+      (val) => {
+        this.toastr.success("Success!");
+        this.loadUserData();
+      },
+      (error) => {
+        this.toastr.error("Fail!")
+      });
   }
 
+  createNewAddressAction(){
+    this.createNewAddress = !this.createNewAddress;
+  }
+
+  addNewAddress(form: NgForm){
+    this.userService.addNewAddress(form).subscribe(
+      (val) => {
+        this.toastr.success("Success!");
+        this.createNewAddress = false;
+        this.loadUserData();
+      },
+      response => {
+        console.log(response);
+        this.toastr.error("Adding new address fail.");
+      });
+  }
+
+  changeUserData(form: NgForm) {
+    this.userService.updateUserData(form);
+  }
+
+  changePassword(form: NgForm){
+    if(form.value.password === form.value.passRep){
+      this.userService.changeUserPassword(form.value.password);
+    }
+    else{
+      this.toastr.error("Passwords don't match")
+    }
+  }
 }

@@ -29,8 +29,6 @@ export class RegisterPageComponent implements OnInit {
         },
         response => {
           this.toastr.error("Register fail. " + response);
-        },
-        () => {
         });
     } else {
       this.toastr.error("Passwords don't match");

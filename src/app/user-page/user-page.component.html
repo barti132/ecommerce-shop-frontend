@@ -4,7 +4,7 @@
 
   <div class="col-4 card ms-5 p-2">
     <h4>Change basic user data</h4>
-    <form>
+    <form #changeUserDataForm="ngForm" (ngSubmit)="changeUserData(changeUserDataForm)">
       <div class="form-group">
         <label for="name">First name</label>
         <input type="text" class="form-control" id="name" name="name" ngModel="{{userData.name}}">
@@ -31,7 +31,7 @@
 
   <div class="col-4 card ms-5 p-2">
     <h4>Change user password</h4>
-    <form>
+    <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)">
       <div class="form-group">
         <label for="password">New password</label>
         <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel">
@@ -54,6 +54,7 @@
     </form>
   </div>
 
+  <h4 class="mt-4">List of address</h4>
   <div class="col-3 card ms-5 mt-4 mb-5 p-2" *ngFor="let address of userData.addresses">
     <h4>address:</h4>
     <ul>
@@ -63,6 +64,34 @@
       <li>{{address.address}}</li>
     </ul>
     <button class="btn btn-lg btn-primary mt-2" (click)="deleteAddress(address.id)">Delete</button>
+  </div>
+  <div class="col-3 card ms-5 mt-4 mb-5 p-2">
+    <div *ngIf="createNewAddress === false; else addressForm">
+      <button class="btn btn-lg btn-primary mt-2" (click)="createNewAddressAction()">Add new address</button>
+    </div>
+    <ng-template #addressForm>
+      <form #addAddressForm="ngForm" (submit)="addNewAddress(addAddressForm)">
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input type="text" class="form-control" id="country" name="country" ngModel>
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" class="form-control" id="city" name="city" ngModel>
+        </div>
+        <div class="form-group">
+          <label for="postalcode">Postal code</label>
+          <input type="text" class="form-control" id="postalcode" name="postalCode" ngModel>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" name="address" ngModel>
+        </div>
+        <button class="btn btn-lg btn-primary mt-2" type="submit">Create</button>
+      </form>
+      <button class="btn btn-lg btn-primary mt-2" (click)="createNewAddressAction()">Cancel</button>
+    </ng-template>
+
   </div>
 
 
