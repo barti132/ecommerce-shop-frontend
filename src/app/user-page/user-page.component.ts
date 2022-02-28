@@ -39,7 +39,7 @@ export class UserPageComponent implements OnInit {
         this.loadUserData();
       },
       (error) => {
-        this.toastr.error("Fail!")
+        this.toastr.error("Deleting fail!")
       });
   }
 
@@ -61,12 +61,25 @@ export class UserPageComponent implements OnInit {
   }
 
   changeUserData(form: NgForm) {
-    this.userService.updateUserData(form);
+    this.userService.updateUserData(form).subscribe(
+      (val) => {
+        this.toastr.success("Success!");
+        this.userData = val;
+      },
+      (error) => {
+        this.toastr.error("Changing fail!")
+      });
   }
 
   changePassword(form: NgForm){
     if(form.value.password === form.value.passRep){
-      this.userService.changeUserPassword(form.value.password);
+      this.userService.changeUserPassword(form.value.password)
+        .subscribe((val) => {
+            this.toastr.success("Success!");
+          },
+          (error) => {
+            this.toastr.error("Changing fail!")
+          });
     }
     else{
       this.toastr.error("Passwords don't match")

@@ -30,7 +30,7 @@ export class SearchPageComponent implements OnInit {
 
       let set = new Set<String>();
       for(let product of products){
-        set.add(product.producer_name);
+        set.add(product.producerName);
       }
       this.producers = Array.from(set);
     });

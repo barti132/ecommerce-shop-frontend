@@ -4,7 +4,7 @@ import {UserData} from "../models/userData.model";
 import {HttpClient} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
 
-const apiUrl = 'http://localhost:8080/api/v1/users/';
+const apiUrl = 'http://localhost:8080/api/v1/user/';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +30,23 @@ export class UserService {
   }
 
   updateUserData(form: NgForm) {
+    let userData: UserData ={
+      "name": form.value.name,
+      "lastName": form.value.lastName,
+      "email": form.value.email,
+      "login": form.value.login,
+      "phoneNumber": form.value.phoneNumber,
+      addresses: []
+    }
 
+    return this.http.put<UserData>(apiUrl + "update", userData);
   }
 
   changeUserPassword(password: string) {
-
+    let passwordDto = {
+      "password": password
+    }
+    return this.http.put(apiUrl + "changePassword", passwordDto,{responseType: 'text'});
   }
 
   deleteAddressById(id: number) {

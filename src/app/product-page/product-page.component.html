@@ -3,14 +3,14 @@
   <div class="container px-4 px-lg-5 my-5">
     <div class="row gx-4 gx-lg-5 align-items-center">
       <div class="col-md-6">
-        <img class="card-img-top mb-5 mb-md-0" [src]=getSantizeUrl(product.img) height="600" width="700" alt="product"/>
+        <img class="card-img-top mb-5 mb-md-0" [src]=getSanitizeUrl(product.img) height="600" width="700" alt="product"/>
       </div>
       <div class="col-md-6">
         <h1 class="display-5 fw-bolder">{{product.name}}</h1>
-        <div class="fs-5 mt-1">Price gross: {{product.price_gross}} zł</div>
-        <div class="fs-5 mb-3">Price net: {{product.price_net}} zł</div>
+        <div class="fs-5 mt-1">Price gross: {{product.priceGross}} zł</div>
+        <div class="fs-5 mb-3">Price net: {{product.priceNet}} zł</div>
         <p>Category: {{product.category}}</p>
-        <p>Producer: {{product.producer_name}}</p>
+        <p>Producer: {{product.producerName}}</p>
         <p class="lead">{{product.description}}</p>
         <div class="d-flex">
           <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1"
