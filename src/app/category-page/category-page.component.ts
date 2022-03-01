@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ProductService} from "../services/product.service";
 import {Product} from "../models/product.model";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-category-page',
@@ -13,6 +14,8 @@ export class CategoryPageComponent implements OnInit {
   products: Product[] = [];
   producers: String[] = [];
   categoryName = "";
+  filterPrice = 0;
+  filterProducer = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -26,17 +29,28 @@ export class CategoryPageComponent implements OnInit {
     });
   }
 
-  private getProducts(category: string) {
+  private getProducts(category: string): void {
     this.categoryName = category;
     this.productService.getProductByCategory(category).subscribe((products) => {
       this.products = products;
-
-      let set = new Set<String>();
-      for(let product of products){
-        set.add(product.producerName);
-      }
-      this.producers = Array.from(set);
+      this.setProducerData();
     });
+  }
+
+  private setProducerData(): void {
+    let set = new Set<String>();
+    for (let product of this.products) {
+      set.add(product.producerName);
+    }
+    this.producers = Array.from(set);
+  }
+
+  applyFilters(form: NgForm): void {
+    this.productService.getProductsByCategoryFilter(this.categoryName, form.value.producer, form.value.price).subscribe(
+      (products) => {
+        this.products = products;
+      }
+    )
   }
 
 }

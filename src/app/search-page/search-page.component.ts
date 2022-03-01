@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProductService} from "../services/product.service";
 import {Product} from "../models/product.model";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-search-page',
@@ -34,5 +35,9 @@ export class SearchPageComponent implements OnInit {
       }
       this.producers = Array.from(set);
     });
+  }
+
+  applyFilters(form: NgForm){
+    console.log(form.value.price, form.value.producer);
   }
 }

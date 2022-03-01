@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {Product} from "../../models/product.model";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-filter-bar',
@@ -10,15 +10,20 @@ import {Product} from "../../models/product.model";
 export class FilterBarComponent implements OnInit {
 
   @Input() producers: String[] = [];
+  @Output() activeFilters = new EventEmitter<NgForm>();
 
-  constructor(
-    private route: ActivatedRoute
-  ) { }
+  constructor() {
+  }
 
   ngOnInit(): void {
-    this.route.params.subscribe((routeParams) => {
-      console.log(routeParams['']);
-    });
+  }
+
+  reloadPage(): void {
+    window.location.reload();
+  }
+
+  public sendFilters(form: NgForm): void {
+    this.activeFilters.emit(form);
   }
 
 }
