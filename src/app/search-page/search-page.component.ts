@@ -28,16 +28,24 @@ export class SearchPageComponent implements OnInit {
   private findProducts(category: string, product: string) {
     this.productService.searchProducts(category, product).subscribe((products) => {
       this.products = products;
-
-      let set = new Set<String>();
-      for(let product of products){
-        set.add(product.producerName);
-      }
-      this.producers = Array.from(set);
+      this.setProducerData();
     });
   }
 
+  private setProducerData(): void {
+    let set = new Set<String>();
+    for (let product of this.products) {
+      set.add(product.producerName);
+    }
+    this.producers = Array.from(set);
+  }
+
   applyFilters(form: NgForm){
-    console.log(form.value.price, form.value.producer);
+    this.route.params.subscribe((routeParams) => {
+      this.productService.searchProductsFilters(routeParams['category'], routeParams['product'], form.value.producer, form.value.price).subscribe(
+        (products) => {
+        this.products = products;
+      });
+    });
   }
 }
