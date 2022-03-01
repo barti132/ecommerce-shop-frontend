@@ -11,14 +11,15 @@ const apiUrl = 'http://localhost:8080/api/v1/user/';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getDataAboutCurrentUser(): Observable<UserData>{
+  getDataAboutCurrentUser(): Observable<UserData> {
 
     return this.http.get<UserData>(apiUrl + "currentUser");
   }
 
-  addNewAddress(form: NgForm) {
+  addNewAddress(form: NgForm): Observable<String> {
     let addressReq = {
       "address": form.value.address,
       "city": form.value.city,
@@ -26,11 +27,11 @@ export class UserService {
       "postalCode": form.value.postalCode
     }
 
-    return this.http.post( apiUrl + "addAddress", addressReq, {responseType: 'text'});
+    return this.http.post(apiUrl + "addAddress", addressReq, {responseType: 'text'});
   }
 
-  updateUserData(form: NgForm) {
-    let userData: UserData ={
+  updateUserData(form: NgForm): Observable<UserData> {
+    let userData: UserData = {
       "name": form.value.name,
       "lastName": form.value.lastName,
       "email": form.value.email,
@@ -42,14 +43,14 @@ export class UserService {
     return this.http.put<UserData>(apiUrl + "update", userData);
   }
 
-  changeUserPassword(password: string) {
+  changeUserPassword(password: string): Observable<String> {
     let passwordDto = {
       "password": password
     }
-    return this.http.put(apiUrl + "changePassword", passwordDto,{responseType: 'text'});
+    return this.http.put(apiUrl + "changePassword", passwordDto, {responseType: 'text'});
   }
 
-  deleteAddressById(id: number) {
+  deleteAddressById(id: number): Observable<Object> {
     return this.http.delete(apiUrl + "address/" + id);
   }
 }

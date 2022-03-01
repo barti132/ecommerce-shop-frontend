@@ -25,7 +25,7 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
-  private findProducts(category: string, product: string) {
+  private findProducts(category: string, product: string): void {
     this.productService.searchProducts(category, product).subscribe((products) => {
       this.products = products;
       this.setProducerData();
@@ -40,12 +40,12 @@ export class SearchPageComponent implements OnInit {
     this.producers = Array.from(set);
   }
 
-  applyFilters(form: NgForm){
+  applyFilters(form: NgForm): void {
     this.route.params.subscribe((routeParams) => {
       this.productService.searchProductsFilters(routeParams['category'], routeParams['product'], form.value.producer, form.value.price).subscribe(
         (products) => {
-        this.products = products;
-      });
+          this.products = products;
+        });
     });
   }
 }

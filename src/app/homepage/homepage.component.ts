@@ -20,7 +20,7 @@ export class HomepageComponent implements OnInit {
     this.getRandomProducts();
   }
 
-  private getRandomProducts() {
+  private getRandomProducts(): void {
     this.productService.getRandomProducts().subscribe((products)=>{
       this.products = products;
     })

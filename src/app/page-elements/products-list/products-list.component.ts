@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../../models/product.model";
-import {DomSanitizer} from "@angular/platform-browser";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-products-list',
@@ -13,16 +13,18 @@ export class ProductsListComponent implements OnInit {
 
   displayFormat = true;
 
-  constructor(private sanitizer: DomSanitizer) { }
-
-  ngOnInit(): void {
+  constructor(private sanitizer: DomSanitizer) {
   }
 
-  public getSanitizeUrl(url : string) {
+  ngOnInit(): void {
+
+  }
+
+  public getSanitizeUrl(url: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
-  changeDisplayFormat(format: boolean){
+  changeDisplayFormat(format: boolean): void {
     this.displayFormat = format;
   }
 

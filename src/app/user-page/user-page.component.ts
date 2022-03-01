@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserData} from "../models/userData.model";
 import {UserService} from "../services/user.service";
 import {NgForm} from "@angular/forms";
@@ -22,17 +22,18 @@ export class UserPageComponent implements OnInit {
 
   createNewAddress = false;
 
-  constructor(private userService: UserService,private toastr: ToastrService) { }
+  constructor(private userService: UserService, private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
     this.loadUserData();
   }
 
-  loadUserData(){
+  loadUserData(): void {
     this.userService.getDataAboutCurrentUser().subscribe(userData => this.userData = userData);
   }
 
-  deleteAddress(id: number) {
+  deleteAddress(id: number): void {
     this.userService.deleteAddressById(id).subscribe(
       (val) => {
         this.toastr.success("Success!");
@@ -43,11 +44,11 @@ export class UserPageComponent implements OnInit {
       });
   }
 
-  createNewAddressAction(){
+  createNewAddressAction(): void {
     this.createNewAddress = !this.createNewAddress;
   }
 
-  addNewAddress(form: NgForm){
+  addNewAddress(form: NgForm): void {
     this.userService.addNewAddress(form).subscribe(
       (val) => {
         this.toastr.success("Success!");
@@ -60,7 +61,7 @@ export class UserPageComponent implements OnInit {
       });
   }
 
-  changeUserData(form: NgForm) {
+  changeUserData(form: NgForm): void {
     this.userService.updateUserData(form).subscribe(
       (val) => {
         this.toastr.success("Success!");
@@ -71,8 +72,8 @@ export class UserPageComponent implements OnInit {
       });
   }
 
-  changePassword(form: NgForm){
-    if(form.value.password === form.value.passRep){
+  changePassword(form: NgForm): void {
+    if (form.value.password === form.value.passRep) {
       this.userService.changeUserPassword(form.value.password)
         .subscribe((val) => {
             this.toastr.success("Success!");
@@ -80,8 +81,7 @@ export class UserPageComponent implements OnInit {
           (error) => {
             this.toastr.error("Changing fail!")
           });
-    }
-    else{
+    } else {
       this.toastr.error("Passwords don't match")
     }
   }

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ViewEncapsulation } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {ToastrService} from "ngx-toastr";
@@ -12,14 +11,15 @@ import {Router} from "@angular/router";
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) { }
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
-  signInUser(form: NgForm): void{
+  signInUser(form: NgForm): void {
     this.authService.login(form).subscribe(
-      (val) => {
+      () => {
         this.toastr.success("Success!");
         setTimeout(() => {
           this.router.navigate(['']);

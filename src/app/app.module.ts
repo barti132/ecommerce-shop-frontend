@@ -18,7 +18,7 @@ import {ProductsListComponent} from './page-elements/products-list/products-list
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {NgxWebstorageModule} from 'ngx-webstorage';
-import { UserPageComponent } from './user-page/user-page.component';
+import {UserPageComponent} from './user-page/user-page.component';
 import {TokenInterceptor} from "./token-interceptor";
 
 @NgModule({
@@ -46,7 +46,7 @@ import {TokenInterceptor} from "./token-interceptor";
     ToastrModule.forRoot(),
     NgxWebstorageModule.forRoot()
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

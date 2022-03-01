@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable, tap} from "rxjs";
@@ -22,9 +22,10 @@ interface refreshRespond {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private storage: LocalStorageService) { }
+  constructor(private http: HttpClient, private storage: LocalStorageService) {
+  }
 
-  registerUser(form: NgForm): Observable<Object>{
+  registerUser(form: NgForm): Observable<Object> {
     let userSignUp = {
       "email": form.value.email,
       "login": form.value.login,
@@ -36,7 +37,7 @@ export class AuthService {
     return this.http.post(apiUrl + "signup", userSignUp, {responseType: 'text'});
   }
 
-  login(form: NgForm): Observable<string>{
+  login(form: NgForm): Observable<string> {
     //token data: "iss":"self","sub":"admin","exp":1645906648,"iat":1645905748,"scope":"admin""
 
     let cred = {
@@ -58,10 +59,12 @@ export class AuthService {
 
         return "success";
       }),
-      map((response) => {return "error: " + response;}));
+      map((response) => {
+        return "error: " + response;
+      }));
   }
 
-  logout(): void{
+  logout(): void {
     let logoutData = {
       "refreshToken": this.storage.retrieve("refreshToken"),
       "login": this.storage.retrieve("name")
@@ -75,7 +78,7 @@ export class AuthService {
     this.storage.clear("refreshToken");
   }
 
-  refreshToken(){
+  refreshToken(): Observable<refreshRespond> {
     let refreshData = {
       "refreshToken": this.getRefreshToken(),
       "login": this.getName()
@@ -91,23 +94,23 @@ export class AuthService {
     );
   }
 
-  isLoggedIn(): boolean{
+  isLoggedIn(): boolean {
     return this.getJWT() != null;
   }
 
-  getJWT(): string{
+  getJWT(): string {
     return this.storage.retrieve("token");
   }
 
-  getRefreshToken(): string{
+  getRefreshToken(): string {
     return this.storage.retrieve("refreshToken");
   }
 
-  getName(): string{
+  getName(): string {
     return this.storage.retrieve("name");
   }
 
-  getRole(): string{
+  getRole(): string {
     return this.storage.retrieve("role");
   }
 }

@@ -20,10 +20,11 @@ export class ProductService {
     return this.http.get<Product[]>(apiUrl + "search?name=" + product + "&category=" + category);
   }
 
-  searchProductsFilters(category: string, product: string, producer: string, price: string) {
+  searchProductsFilters(category: string, product: string, producer: string, price: string): Observable<Product[]> {
     let searchQuery = "?name=" + product;
-    if(category !== "any")
+    if (category !== "any") {
       searchQuery += "&category=" + category;
+    }
     if (producer !== "") {
       searchQuery += "&producer=" + producer;
     }
@@ -32,7 +33,6 @@ export class ProductService {
       searchQuery += "&lowerPrice=" + arr[0] + "&upperPrice=" + arr[1];
     }
 
-    console.log(searchQuery);
     return this.http.get<Product[]>(apiUrl + "search" + searchQuery);
   }
 
