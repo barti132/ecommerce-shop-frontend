@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../services/product.service";
 import {Product} from "../models/product.model";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {AuthService} from "../services/auth.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-product-page',
@@ -19,13 +21,18 @@ export class ProductPageComponent implements OnInit {
     description: "",
     img: "",
     priceNet: 0,
-    priceGross: 0
+    priceGross: 0,
+    amount: 0
   };
+
+  isLogged = false;
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private authService: AuthService,
+    private router: Router
   ) {
   }
 
@@ -33,6 +40,7 @@ export class ProductPageComponent implements OnInit {
     this.route.params.subscribe((routeParams) => {
       this.getProduct(routeParams['id']);
     });
+    this.isLogged = this.authService.isLoggedIn();
   }
 
   private getProduct(id: number): void {
@@ -49,4 +57,11 @@ export class ProductPageComponent implements OnInit {
       return "assets/images/placeholder.png";
   }
 
+  addToCart(form: NgForm): void{
+
+  }
+
+  navigateToLoginPage(): void{
+    this.router.navigate(['login']);
+  }
 }

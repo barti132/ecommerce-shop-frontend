@@ -15,7 +15,6 @@ export class CategoryPageComponent implements OnInit {
   producers: String[] = [];
   categoryName = "";
   filterPrice = 0;
-  filterProducer = "";
 
   constructor(
     private route: ActivatedRoute,

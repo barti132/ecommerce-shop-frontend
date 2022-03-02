@@ -18,8 +18,13 @@
               <p class="m-0">Category: {{product.category}}</p>
               <p>Producer: {{product.producerName}}</p>
               <p class="lead">{{product.description}}</p>
-              <b>{{product.priceGross}} zł</b>
+              <b>{{product.priceGross}} zł
+                <span *ngIf="product.amount == 0">
+                unavailable
+                </span>
+              </b>
             </div>
+
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group mx-auto">
                 <a href="product/{{product.id}}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
@@ -39,6 +44,9 @@
             <p>Producer: {{product.producerName}}</p>
             <p class="lead">{{product.description}}</p>
 
+            <div *ngIf="product.amount == 0">
+              unavailable
+            </div>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group mx-auto">
                 <a href="product/{{product.id}}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
