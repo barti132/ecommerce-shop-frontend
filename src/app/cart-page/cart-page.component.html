@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<main>
+  <h1>Your shopping cart:</h1>
+  <div class="card">
+    <ul class="list-group align-items-center">
+      <div class="mt-4 mb-4" *ngIf="cart === null; else notNullCart">
+        <h4>Your cart is empty.</h4>
+      </div>
+      <ng-template #notNullCart>
+        <li class="list-group-item mb-1 mt-2 w-50 shadow" style="display: flex"
+            *ngFor="let cartItem of cart.products; let i = index" [attr.data-index]="i">
+          <div class="card-body  row">
+            <div class="col text-center">
+              <h1>{{cartItem.product.name}}</h1>
+              <p>Producer: {{cartItem.product.producerName}}</p>
+            </div>
+            <div class="col text-center justify-content-center">
+              <p>Amount: {{cartItem.amount}}</p>
+              <p>Price Gross: {{cartItem.amount * cartItem.product.priceGross}}</p>
+              <p>Price Net: {{cartItem.amount * cartItem.product.priceNet}}</p>
+            </div>
+          </div>
+          <button class="btn-close" (click)="deleteCartItem(i)"></button>
+        </li>
+
+        <button class="btn btn-outline-primary mt-4" (click)="clearCart()">Clear shopping cart</button>
+        <div class="row mt-4 mb-4">
+          <h3>Summary:</h3>
+          <div class="col">Total items: {{cart.totalItems}}</div>
+          <div class="col">Total price gross: {{cart.totalPriceGross}}</div>
+          <div class="col">Total price net: {{cart.totalPriceNet}}</div>
+        </div>
+      </ng-template>
+    </ul>
+  </div>
+</main>
+<app-footer></app-footer>

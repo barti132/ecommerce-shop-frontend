@@ -20,6 +20,7 @@ import {ToastrModule} from "ngx-toastr";
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {UserPageComponent} from './user-page/user-page.component';
 import {TokenInterceptor} from "./token-interceptor";
+import { CartPageComponent } from './cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {TokenInterceptor} from "./token-interceptor";
     SearchPageComponent,
     FilterBarComponent,
     ProductsListComponent,
-    UserPageComponent
+    UserPageComponent,
+    CartPageComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,8 @@ import {Product} from "../models/product.model";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {AuthService} from "../services/auth.service";
 import {NgForm} from "@angular/forms";
+import {CartService} from "../services/cart.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-product-page',
@@ -32,7 +34,9 @@ export class ProductPageComponent implements OnInit {
     private productService: ProductService,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService,
+    private toastr: ToastrService
   ) {
   }
 
@@ -58,7 +62,12 @@ export class ProductPageComponent implements OnInit {
   }
 
   addToCart(form: NgForm): void{
-
+    this.cartService.addItemToCart(this.product.id, form.value.amount).subscribe(() => {
+      this.toastr.success("Added to your shopping cart.");
+    },
+      () => {
+      this.toastr.error("Fail!");
+      })
   }
 
   navigateToLoginPage(): void{
