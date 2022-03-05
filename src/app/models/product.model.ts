@@ -6,6 +6,5 @@ export interface Product {
   description: string,
   img: string,
   priceNet: number,
-  priceGross: number,
-  amount: number
+  priceGross: number
 }

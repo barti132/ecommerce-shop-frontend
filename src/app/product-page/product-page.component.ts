@@ -7,6 +7,7 @@ import {AuthService} from "../services/auth.service";
 import {NgForm} from "@angular/forms";
 import {CartService} from "../services/cart.service";
 import {ToastrService} from "ngx-toastr";
+import {Stock} from "../models/stock.model";
 
 @Component({
   selector: 'app-product-page',
@@ -14,6 +15,8 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./product-page.component.css']
 })
 export class ProductPageComponent implements OnInit {
+
+
 
   product: Product = {
     id: 0,
@@ -23,9 +26,15 @@ export class ProductPageComponent implements OnInit {
     description: "",
     img: "",
     priceNet: 0,
-    priceGross: 0,
-    amount: 0
+    priceGross: 0
   };
+
+  stock: Stock = {
+    id: 1,
+    product: this.product,
+    amount: 0,
+    updatedDate: new Date("")
+  }
 
   isLogged = false;
 
@@ -48,9 +57,9 @@ export class ProductPageComponent implements OnInit {
   }
 
   private getProduct(id: number): void {
-    this.productService.getProduct(id).subscribe((product) => {
-      console.log(product)
-      this.product = product;
+    this.productService.getProductStock(id).subscribe((stock) => {
+      this.stock = stock
+      this.product = stock.product;
     });
   }
 
@@ -61,16 +70,20 @@ export class ProductPageComponent implements OnInit {
       return "assets/images/placeholder.png";
   }
 
-  addToCart(form: NgForm): void{
-    this.cartService.addItemToCart(this.product.id, form.value.amount).subscribe(() => {
-      this.toastr.success("Added to your shopping cart.");
-    },
-      () => {
+  addToCart(form: NgForm): void {
+    if (form.value.amount == null || form.value.amount < 1 || form.value.amount > this.stock.amount) {
       this.toastr.error("Fail!");
-      })
+    } else {
+      this.cartService.addItemToCart(this.product.id, form.value.amount).subscribe(() => {
+          this.toastr.success("Added to your shopping cart.");
+        },
+        () => {
+          this.toastr.error("Fail!");
+        })
+    }
   }
 
-  navigateToLoginPage(): void{
+  navigateToLoginPage(): void {
     this.router.navigate(['login']);
   }
 }
