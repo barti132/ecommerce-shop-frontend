@@ -37,6 +37,7 @@ export class CartService {
     let orderReq = {
       "addressId": address
     }
-    return this.http.post(apiUrl + this.authService.getName() + "/make-order", orderReq);
+
+    return this.http.post(apiUrl + this.authService.getName() + "/make-order", orderReq, {responseType: "blob"});
   }
 }
