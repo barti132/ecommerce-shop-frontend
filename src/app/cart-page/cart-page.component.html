@@ -16,19 +16,42 @@
             </div>
             <div class="col text-center justify-content-center">
               <p>Amount: {{cartItem.amount}}</p>
-              <p>Price Gross: {{cartItem.amount * cartItem.product.priceGross}}</p>
-              <p>Price Net: {{cartItem.amount * cartItem.product.priceNet}}</p>
+              <p>Price Gross: {{cartItem.amount * cartItem.product.priceGross}} $</p>
+              <p>Price Net: {{cartItem.amount * cartItem.product.priceNet}} $</p>
             </div>
           </div>
           <button class="btn-close" (click)="deleteCartItem(i)"></button>
         </li>
 
         <button class="btn btn-outline-primary mt-4" (click)="clearCart()">Clear shopping cart</button>
-        <div class="row mt-4 mb-4">
+        <div class="card shadow p-3 mt-4 mb-4">
           <h3>Summary:</h3>
           <div class="col">Total items: {{cart.totalItems}}</div>
-          <div class="col">Total price gross: {{cart.totalPriceGross}}</div>
-          <div class="col">Total price net: {{cart.totalPriceNet}}</div>
+          <div class="col">Total price gross: {{cart.totalPriceGross}} $</div>
+          <div class="col">Total price net: {{cart.totalPriceNet}} $</div>
+        </div>
+        <button *ngIf="!buyStatus" class="btn btn-primary mt-1 mb-4" (click)="changeBuyStatus()">Buy</button>
+        <div *ngIf="buyStatus" class="w-50">
+          <h2>Choose your delivery address: </h2>
+          <p>(if empty please insert address in your profile)</p>
+
+          <form #orderForm="ngForm" (submit)="createOrder(orderForm)">
+            <div class="row">
+              <div class="col-3 card shadow ms-5 mt-4 mb-5 p-2" *ngFor="let address of userData.addresses">
+                <input type="radio" name="address" value="{{address.id}}" ngModel>
+                <h4>address:</h4>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">{{address.country}}</li>
+                  <li class="list-group-item">{{address.city}}</li>
+                  <li class="list-group-item">{{address.postalCode}}</li>
+                  <li class="list-group-item">{{address.address}}</li>
+                </ul>
+              </div>
+            </div>
+
+            <button class="btn btn-primary mt-1 mb-4 me-2" (click)="changeBuyStatus()">Cancel</button>
+            <button class="btn btn-primary mt-1 mb-4" type="submit">Buy</button>
+          </form>
         </div>
       </ng-template>
     </ul>

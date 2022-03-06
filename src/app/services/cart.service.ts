@@ -22,7 +22,7 @@ export class CartService {
       "productId": id,
       "amount": amount
     }
-    return this.http.post(apiUrl + this.authService.getName() + "/addItem", cartItem);
+    return this.http.post(apiUrl + this.authService.getName() + "/add-item", cartItem);
   }
 
   deleteCartItem(id: number): Observable<Object> {
@@ -31,5 +31,12 @@ export class CartService {
 
   deleteAllCart(): Observable<Object> {
     return this.http.delete(apiUrl + this.authService.getName() + "/all");
+  }
+
+  createOrder(address: number) {
+    let orderReq = {
+      "addressId": address
+    }
+    return this.http.post(apiUrl + this.authService.getName() + "/make-order", orderReq);
   }
 }

@@ -2,7 +2,7 @@
 
 <div class="row">
 
-  <div class="col-4 card ms-5 p-2">
+  <div class="col-4 card shadow ms-5 p-2">
     <h4>Change basic user data</h4>
     <form #changeUserDataForm="ngForm" (ngSubmit)="changeUserData(changeUserDataForm)">
       <div class="form-group">
@@ -29,7 +29,7 @@
     </form>
   </div>
 
-  <div class="col-4 card ms-5 p-2">
+  <div class="col-4 card shadow ms-5 p-2">
     <h4>Change user password</h4>
     <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)">
       <div class="form-group">
@@ -55,7 +55,7 @@
   </div>
 
   <h4 class="mt-4">List of address</h4>
-  <div class="col-3 card ms-5 mt-4 mb-5 p-2" *ngFor="let address of userData.addresses">
+  <div class="col-3 card shadow ms-5 mt-4 mb-5 p-2" *ngFor="let address of userData.addresses">
     <h4>address:</h4>
     <ul>
       <li>{{address.country}}</li>
@@ -65,7 +65,7 @@
     </ul>
     <button class="btn btn-lg btn-primary mt-2" (click)="deleteAddress(address.id)">Delete</button>
   </div>
-  <div class="col-3 card ms-5 mt-4 mb-5 p-2">
+  <div class="col-3 card shadow ms-5 mt-4 mb-5 p-2">
     <div *ngIf="createNewAddress === false; else addressForm">
       <button class="btn btn-lg btn-primary mt-2" (click)="createNewAddressAction()">Add new address</button>
     </div>
