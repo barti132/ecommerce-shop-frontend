@@ -57,16 +57,16 @@ input[type="submit"] {
 .box-label {
   color: #11698e;
   font-size: 0.9rem;
-  font-weight: 800
+  font-weight: 800;
 }
 
 .box-label .btn {
   padding: 0;
-  font-size: 0.8rem
+  font-size: 0.9rem;
 }
 
 label {
-  cursor: pointer
+  cursor: pointer;
 }
 
 .tick {
@@ -75,7 +75,7 @@ label {
   padding-left: 23px;
   cursor: pointer;
   font-size: 0.9rem;
-  margin: 0
+  margin: 0;
 }
 
 .tick input {
@@ -83,7 +83,7 @@ label {
   opacity: 0;
   cursor: pointer;
   height: 0;
-  width: 0
+  width: 0;
 }
 
 .check {
@@ -94,26 +94,26 @@ label {
   width: 18px;
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 3px
+  border-radius: 3px;
 }
 
 .tick:hover input ~ .check {
-  background-color: #f3f3f3
+  background-color: #f3f3f3;
 }
 
 .tick input:checked ~ .check {
-  background-color: #ffffff
+  background-color: #ffffff;
 }
 
 .check:after {
   content: "";
   position: absolute;
-  display: none
+  display: none;
 }
 
 .tick input:checked ~ .check:after {
   display: block;
-  transform: rotate(45deg) scale(1)
+  transform: rotate(45deg) scale(1);
 }
 
 .tick .check:after {
@@ -123,25 +123,25 @@ label {
   height: 10px;
   border: solid rgb(0, 0, 0);
   border-width: 0 3px 3px 0;
-  transform: rotate(45deg) scale(2)
+  transform: rotate(45deg) scale(2);
 }
 
 #filter {
-  width: 200px
+  width: 200px;
 }
 
 .btn {
   width: 150px;
-  border-radius: 0
+  border-radius: 0;
 }
 
 .btn.enquiry {
   background-color: #ff761b;
-  color: #fff
+  color: #fff;
 }
 
 .btn.enquiry:hover {
-  background-color: #fc771fef
+  background-color: #fc771fef;
 }
 
 @media (max-width: 1399px) {
@@ -151,31 +151,31 @@ label {
     float: none;
     width: 250px;
     background-color: #161616f5;
-    z-index: 10
+    z-index: 10;
   }
 
   #content {
     float: none;
-    width: 100%
+    width: 100%;
   }
 }
 
 @media (max-width: 1199px) {
   #side-nav {
-    height: initial
+    height: initial;
   }
 }
 
 @media (max-width: 767px) {
   .btn {
     width: 120px;
-    font-size: 0.85rem
+    font-size: 0.85rem;
   }
 
   input[type="submit"] {
     width: 100px;
     font-size: 0.9rem;
-    margin-right: 10px
+    margin-right: 10px;
   }
 }
 
@@ -183,7 +183,7 @@ label {
 
   #filter {
     width: 95%;
-    margin: 15px
+    margin: 15px;
   }
 }
 
@@ -191,6 +191,6 @@ label {
 
   #filter {
     width: 93%;
-    margin: 10px
+    margin: 10px;
   }
 }

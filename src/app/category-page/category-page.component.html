@@ -1,12 +1,14 @@
 <app-navbar></app-navbar>
 
+<main>
+  <h1 class="text-center">Category {{categoryName}}:</h1>
+  <h2 class="text-center">{{products.length}} results</h2>
+  <div class="d-sm-flex border p-0 justify-content-center mx-auto">
+    <app-filter-bar [producers]="producers" (activeFilters)="applyFilters($event)"
+                    style="margin-top: 3.3%"></app-filter-bar>
+    <app-products-list [products]="products" class="w-75"></app-products-list>
+  </div>
+</main>
 
-<h1 class="text-center">Category {{categoryName}}:</h1>
-<h2 class="text-center">{{products.length}} results</h2>
-<div class="d-sm-flex border p-0 justify-content-center mx-auto">
-  <app-filter-bar [producers]="producers" (activeFilters)="applyFilters($event)" style="margin-top: 3.3%"></app-filter-bar>
-  <app-products-list [products]="products" class="w-75"></app-products-list>
-</div>
 
-
-<app-footer></app-footer>
+<app-footer class="mt-auto"></app-footer>

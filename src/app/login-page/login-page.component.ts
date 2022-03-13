@@ -25,8 +25,8 @@ export class LoginPageComponent implements OnInit {
           this.router.navigate(['']);
         }, 500);
       },
-      response => {
-        this.toastr.error("Sign in fail. " + response);
+      () => {
+        this.toastr.error("Sign in fail.");
       });
   }
 

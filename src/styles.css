@@ -1,7 +1,15 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+html{
+  min-height: 100vh;
+}
+
 body{
   font-size: 20px;
-  min-height: 100vh;
+  min-height: 100vh !important;
+}
+
+main{
+  min-height: 77vh;
 }
 
