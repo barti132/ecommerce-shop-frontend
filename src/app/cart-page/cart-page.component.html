@@ -1,21 +1,26 @@
 <app-navbar></app-navbar>
 <main>
-  <h1>Your shopping cart:</h1>
+  <div class="p-3">
+    <h1>Ecommerceshop.com</h1>
+    <h2 class="mt-2"><i class="bi bi-bag"></i> Your shopping cart:</h2>
+  </div>
   <div class="card">
     <ul class="list-group align-items-center">
       <div class="mt-4 mb-4" *ngIf="cart === null; else notNullCart">
         <h4>Your cart is empty.</h4>
       </div>
       <ng-template #notNullCart>
-        <li class="list-group-item mb-1 mt-2 w-50 shadow" style="display: flex"
+        <li class="list-group-item mb-1 mt-4 w-75 shadow" style="display: flex"
             *ngFor="let cartItem of cart.products; let i = index" [attr.data-index]="i">
-          <div class="card-body  row">
+          <div class="card-body row">
             <div class="col text-center">
               <h1>{{cartItem.product.name}}</h1>
               <p>Producer: {{cartItem.product.producerName}}</p>
             </div>
-            <div class="col text-center justify-content-center">
+            <div class="col text-center justify-content-center mx-auto">
               <p>Amount: {{cartItem.amount}}</p>
+            </div>
+            <div class="col text-center justify-content-center">
               <p>Price Gross: {{cartItem.amount * cartItem.product.priceGross}} $</p>
               <p>Price Net: {{cartItem.amount * cartItem.product.priceNet}} $</p>
             </div>
@@ -23,34 +28,60 @@
           <button class="btn-close" (click)="deleteCartItem(i)"></button>
         </li>
 
-        <button class="btn btn-outline-primary mt-4" (click)="clearCart()">Clear shopping cart</button>
-        <div class="card shadow p-3 mt-4 mb-4">
-          <h3>Summary:</h3>
+        <button class="btn btn-outline-primary mt-4 p-2" style="width: 15%" (click)="clearCart()">Clear shopping cart</button>
+        <div class="card shadow p-5 mt-4 mb-4">
+          <h3><i class="bi bi-cash-stack"></i> Summary:</h3>
           <div class="col">Total items: {{cart.totalItems}}</div>
           <div class="col">Total price gross: {{cart.totalPriceGross}} $</div>
           <div class="col">Total price net: {{cart.totalPriceNet}} $</div>
         </div>
-        <button *ngIf="!buyStatus" class="btn btn-primary mt-1 mb-4" (click)="changeBuyStatus()">Buy</button>
+        <button *ngIf="!buyStatus" class="btn btn-primary mt-1 mb-4 p-2" style="width: 15%" (click)="changeBuyStatus()">Check out</button>
+
         <div *ngIf="buyStatus" class="w-50">
-          <h2>Choose your delivery address: </h2>
+          <h2 class="w-100 p-2 card-header"><i class="bi bi-truck"></i> Choose your delivery address: </h2>
           <p>(if empty please insert address in your profile)</p>
 
           <form #orderForm="ngForm" (submit)="createOrder(orderForm)">
             <div class="row">
               <div class="col-3 card shadow ms-5 mt-4 mb-5 p-2" *ngFor="let address of userData.addresses">
-                <input type="radio" name="address" value="{{address.id}}" ngModel>
-                <h4>address:</h4>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{{address.country}}</li>
-                  <li class="list-group-item">{{address.city}}</li>
-                  <li class="list-group-item">{{address.postalCode}}</li>
-                  <li class="list-group-item">{{address.address}}</li>
-                </ul>
+                <input type="radio" id='address + {{address.id}}' name="address" value="{{address.id}}" ngModel>
+                <label for='address + {{address.id}}'>
+                  <h4>address:</h4>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{address.country}}</li>
+                    <li class="list-group-item">{{address.city}}</li>
+                    <li class="list-group-item">{{address.postalCode}}</li>
+                    <li class="list-group-item">{{address.address}}</li>
+                  </ul>
+                </label>
               </div>
             </div>
 
-            <button class="btn btn-primary mt-1 mb-4 me-2" (click)="changeBuyStatus()">Cancel</button>
-            <button class="btn btn-primary mt-1 mb-4" type="submit">Buy</button>
+            <h2 class="w-100 p-2 card-header"> <i class="bi bi-wallet2"></i> Payment method: </h2>
+            <div class="col-3 card shadow mx-auto ms-5 mt-4  mb-5 w-75">
+              <div class="card-header">
+                <h5><i class="bi bi-credit-card"></i> Credit card</h5>
+              </div>
+              <div class="card-body">
+                <label for="cardnumber">Card number</label>
+                <input type="text" id="cardnumber" name="cardNumber" class="form-control" ngModel>
+                <label for="cardname">Name on card</label>
+                <input type="text" id="cardname" name="cardName" class="form-control" ngModel>
+                <div class="row">
+                  <div class="col">
+                    <label for="expiration">Expiration date(MM / YY)</label>
+                    <input type="text" id="expiration" name="expiration" class="form-control" ngModel>
+                  </div>
+                  <div class="col">
+                    <label for="securityCode">Security code</label>
+                    <input type="text" id="securityCode" name="securityCode" class="form-control" ngModel>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary mt-1 mb-4 me-3 p-2" style="width: 15%" (click)="changeBuyStatus()">Cancel</button>
+            <button class="btn btn-primary mt-1 mb-4 p-2" style="width: 15%" type="submit">Buy</button>
           </form>
         </div>
       </ng-template>

@@ -17,7 +17,7 @@
               <h1>{{product.name}}</h1>
               <p class="m-0">Category: {{product.category}}</p>
               <p>Producer: {{product.producerName}}</p>
-              <p class="lead">{{product.description}}</p>
+              <p class="lead cut-text">{{product.description}}</p>
               <b>{{product.priceGross}} $</b>
             </div>
 
@@ -33,12 +33,12 @@
     <ng-template #ListDisplay>
       <ul class="list-group">
         <li class="list-group-item mb-1" style="display: flex" *ngFor="let product of products">
-          <img [src]=getSanitizeUrl(product.img) style="width: auto;"  height="330px" alt="product" class="col"/>
+          <img [src]=getSanitizeUrl(product.img) style="width: auto;" height="330px" alt="product" class="col"/>
           <div class="col text-center">
             <h1>{{product.name}}</h1>
             <p class="m-0">Category: {{product.category}}</p>
             <p>Producer: {{product.producerName}}</p>
-            <p class="lead">{{product.description}}</p>
+            <p class="lead cut-text">{{product.description}}</p>
 
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group mx-auto">
