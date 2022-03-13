@@ -33,7 +33,7 @@
     <ng-template #ListDisplay>
       <ul class="list-group">
         <li class="list-group-item mb-1" style="display: flex" *ngFor="let product of products">
-          <img [src]=getSanitizeUrl(product.img) style="max-width: 35%; height: auto;" alt="product" class="col"/>
+          <img [src]=getSanitizeUrl(product.img) style="width: auto;"  height="330px" alt="product" class="col"/>
           <div class="col text-center">
             <h1>{{product.name}}</h1>
             <p class="m-0">Category: {{product.category}}</p>

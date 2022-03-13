@@ -2,9 +2,9 @@
 
 
 <h1 class="text-center">Search results {{products.length}}:</h1>
-<div class="d-sm-flex  my-sm-5 border p-0 mx-auto justify-content-center">
-  <app-filter-bar [producers]="producers" (activeFilters)="applyFilters($event)"></app-filter-bar>
-  <app-products-list [products]="products"></app-products-list>
+<div class="d-sm-flex border p-0 mx-auto justify-content-center">
+  <app-filter-bar [producers]="producers" (activeFilters)="applyFilters($event)" style="margin-top: 3.3%"></app-filter-bar>
+  <app-products-list [products]="products" class="w-75"></app-products-list>
 </div>
 
 
