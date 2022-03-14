@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {AuthService} from "./auth.service";
 import {Observable} from "rxjs";
 import {Cart} from "../models/cart.model";
+import {NgForm} from "@angular/forms";
 
 const apiUrl = 'http://localhost:8080/api/v1/cart/';
 
@@ -33,9 +34,13 @@ export class CartService {
     return this.http.delete(apiUrl + this.authService.getName() + "/all");
   }
 
-  createOrder(address: number) {
+  createOrder(form: NgForm): Observable<Blob> {
     let orderReq = {
-      "addressId": address
+      "addressId": form.value.address,
+      "cardNumber": form.value.cardNumber,
+      "cardName": form.value.cardName,
+      "expiration": form.value.expiration,
+      "securityCode": form.value.securityCode
     }
 
     return this.http.post(apiUrl + this.authService.getName() + "/make-order", orderReq, {responseType: "blob"});

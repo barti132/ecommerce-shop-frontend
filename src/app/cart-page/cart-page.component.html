@@ -41,10 +41,10 @@
           <h2 class="w-100 p-2 card-header"><i class="bi bi-truck"></i> Choose your delivery address: </h2>
           <p>(if empty please insert address in your profile)</p>
 
-          <form #orderForm="ngForm" (submit)="createOrder(orderForm)">
+          <form #orderForm="ngForm" (submit)="createOrder(orderForm)" ngNativeValidate>
             <div class="row">
               <div class="col-3 card shadow ms-5 mt-4 mb-5 p-2" *ngFor="let address of userData.addresses">
-                <input type="radio" id='address + {{address.id}}' name="address" value="{{address.id}}" ngModel>
+                <input type="radio" id='address + {{address.id}}' name="address" value="{{address.id}}" ngModel required>
                 <label for='address + {{address.id}}'>
                   <h4>address:</h4>
                   <ul class="list-group list-group-flush">
@@ -64,17 +64,17 @@
               </div>
               <div class="card-body">
                 <label for="cardnumber">Card number</label>
-                <input type="text" id="cardnumber" name="cardNumber" class="form-control" ngModel>
+                <input type="text" id="cardnumber" name="cardNumber"  class="form-control" ngModel required minlength="15" maxlength="16">
                 <label for="cardname">Name on card</label>
-                <input type="text" id="cardname" name="cardName" class="form-control" ngModel>
+                <input type="text" id="cardname" name="cardName" class="form-control" ngModel required>
                 <div class="row">
                   <div class="col">
                     <label for="expiration">Expiration date(MM / YY)</label>
-                    <input type="text" id="expiration" name="expiration" class="form-control" ngModel>
+                    <input type="text" id="expiration" pattern="([0-9]{2}[/]?){2}" name="expiration" class="form-control" ngModel required>
                   </div>
                   <div class="col">
                     <label for="securityCode">Security code</label>
-                    <input type="text" id="securityCode" name="securityCode" class="form-control" ngModel>
+                    <input type="text" id="securityCode" name="securityCode" class="form-control" ngModel required minlength="3" maxlength="4">
                   </div>
                 </div>
               </div>

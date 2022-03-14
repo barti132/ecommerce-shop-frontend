@@ -73,7 +73,7 @@ export class CartPageComponent implements OnInit {
   }
 
   createOrder(form: NgForm): void {
-    this.cartService.createOrder(form.value.address).subscribe((res) => {
+    this.cartService.createOrder(form).subscribe((res) => {
 
         this.loadUserData();
         this.changeBuyStatus();
