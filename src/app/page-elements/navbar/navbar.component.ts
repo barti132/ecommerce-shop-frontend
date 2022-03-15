@@ -11,12 +11,14 @@ import {AuthService} from "../../services/auth.service";
 export class NavbarComponent implements OnInit {
 
   isLogged = false;
+  isAdmin = false;
 
   constructor(private router: Router, private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.isLogged = this.authService.isLoggedIn();
+    this.isAdmin = this.authService.isAdmin();
   }
 
   search(form: NgForm): void {

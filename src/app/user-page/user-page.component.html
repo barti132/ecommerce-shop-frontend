@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
           <label for="lastname">Last name</label>
-          <input type="text" class="form-control" id="lastname" name="lastname" ngModel="{{userData.lastName}}">
+          <input type="text" class="form-control" id="lastname" name="lastName" ngModel="{{userData.lastName}}">
         </div>
         <div class="form-group">
           <label for="email">Email</label>
@@ -98,6 +98,30 @@
       </form>
       <button class="btn btn-lg btn-primary mt-2" (click)="createNewAddressAction()">Cancel</button>
     </ng-template>
+  </div>
+  <h4 class="mt-5 p-3 card-header">Order history:</h4>
+  <div class="mb-4 mt-2 d-flex justify-content-center">
+    <ol class="list-group list-group-numbered w-50">
+    <li class="list-group-item mb-1 shadow" style="display: flex; font-size: 16px"
+        *ngFor="let invoice of invoices; let i = index" [attr.data-index]="i">
+      <div class="card-body row">
+        <div class="col text-center">
+          <p>Invoice id: {{invoice.id}}<br>
+          {{invoice.invoiceDate}}</p>
+        </div>
+        <div class="col text-center justify-content-center mx-auto">
+          <p>{{invoice.address.city}}<br>
+          {{invoice.address.address}}<br>
+          {{invoice.address.postalCode}}</p>
+        </div>
+        <div class="col text-center justify-content-center">
+          <p>Price Gross: {{invoice.totalPriceGross}} $<br>
+          Price Net: {{invoice.totalPriceNet}} $</p>
+        </div>
+      </div>
+      <button class="btn" (click)="getInvoicePDF(invoice.id)">View PDF</button>
+    </li>
+    </ol>
 
   </div>
 

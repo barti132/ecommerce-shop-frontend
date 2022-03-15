@@ -18,12 +18,21 @@
         </select>
         <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
       </form>
+
       <div *ngIf="isLogged === false; else logged">
         <a href="/login" class="btn btn-success ms-2">
           Sign in
         </a>
       </div>
       <ng-template #logged>
+        <div *ngIf="isAdmin" class="dropdown me-3">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-list-ul display-6"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="/admin-users-page">User management</a></li>
+          </ul>
+        </div>
         <a href="/cart"><i class="bi bi-cart display-6 me-2"></i></a>
         <a href="/user"><i class="bi bi-person-circle display-6 me-2" style="color:white"></i></a>
         <button (click)="logout()" class="btn btn-success ms-2">

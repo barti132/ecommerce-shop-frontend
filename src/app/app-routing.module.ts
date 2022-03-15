@@ -9,6 +9,7 @@ import {CategoryPageComponent} from "./category-page/category-page.component";
 import {SearchPageComponent} from "./search-page/search-page.component";
 import {UserPageComponent} from "./user-page/user-page.component";
 import {CartPageComponent} from "./cart-page/cart-page.component";
+import {AdminUsersPageComponent} from "./admin-users-page/admin-users-page.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
   {path: 'cart', component: CartPageComponent},
   {path: 'register', component: RegisterPageComponent},
+  {path: 'admin-users-page', component: AdminUsersPageComponent},
   {path: 'category/:category', component: CategoryPageComponent},
   {path: 'product/:id', component: ProductPageComponent},
   {path: 'search/:category/:product', component: SearchPageComponent}

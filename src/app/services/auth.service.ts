@@ -113,4 +113,8 @@ export class AuthService {
   getRole(): string {
     return this.storage.retrieve("role");
   }
+
+  isAdmin(){
+    return this.getRole() === "admin";
+  }
 }

@@ -3,13 +3,15 @@ import {UserData} from "../models/userData.model";
 import {UserService} from "../services/user.service";
 import {NgForm} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
+import {Invoice} from "../models/invoice.model";
+import {InvoiceService} from "../services/invoice.service";
 
 @Component({
   selector: 'app-user-page',
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.css']
 })
-export class UserPageComponent implements OnInit {
+export class UserPageComponent implements OnInit{
 
   userData: UserData = {
     name: "",
@@ -20,37 +22,40 @@ export class UserPageComponent implements OnInit {
     addresses: []
   };
 
+  invoices: Invoice[];
+
   createNewAddress = false;
 
-  constructor(private userService: UserService, private toastr: ToastrService) {
+  constructor(private userService: UserService, private toastr: ToastrService, private invoiceService: InvoiceService){
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void{
     this.loadUserData();
   }
 
-  loadUserData(): void {
+  loadUserData(): void{
     this.userService.getDataAboutCurrentUser().subscribe(userData => this.userData = userData);
+    this.invoiceService.getUserInvoicesHistory().subscribe(invoices => this.invoices = invoices);
   }
 
-  deleteAddress(id: number): void {
+  deleteAddress(id: number): void{
     this.userService.deleteAddressById(id).subscribe(
-      (val) => {
+      () => {
         this.toastr.success("Success!");
         this.loadUserData();
       },
-      (error) => {
+      () => {
         this.toastr.error("Deleting fail!")
       });
   }
 
-  createNewAddressAction(): void {
+  createNewAddressAction(): void{
     this.createNewAddress = !this.createNewAddress;
   }
 
-  addNewAddress(form: NgForm): void {
+  addNewAddress(form: NgForm): void{
     this.userService.addNewAddress(form).subscribe(
-      (val) => {
+      () => {
         this.toastr.success("Success!");
         this.createNewAddress = false;
         this.loadUserData();
@@ -61,28 +66,40 @@ export class UserPageComponent implements OnInit {
       });
   }
 
-  changeUserData(form: NgForm): void {
+  changeUserData(form: NgForm): void{
     this.userService.updateUserData(form).subscribe(
       (val) => {
         this.toastr.success("Success!");
         this.userData = val;
       },
-      (error) => {
+      () => {
         this.toastr.error("Changing fail!")
       });
   }
 
-  changePassword(form: NgForm): void {
-    if (form.value.password === form.value.passRep) {
+  changePassword(form: NgForm): void{
+    if(form.value.password === form.value.passRep){
       this.userService.changeUserPassword(form.value.password)
-        .subscribe((val) => {
+        .subscribe(() => {
             this.toastr.success("Success!");
           },
-          (error) => {
+          () => {
             this.toastr.error("Changing fail!")
           });
-    } else {
+    }else{
       this.toastr.error("Passwords don't match")
     }
+  }
+
+  getInvoicePDF(id: number): void{
+    this.invoiceService.getInvoicePDF(id).subscribe((res) => {
+        const fileURL = URL.createObjectURL(new Blob([res], {type: 'application/pdf'}));
+        window.open(fileURL, '_blank');
+        this.toastr.success("success");
+      },
+      (err) => {
+        this.toastr.error("Error");
+        console.log(err)
+      });
   }
 }
