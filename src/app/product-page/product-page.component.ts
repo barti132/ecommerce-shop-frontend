@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductService} from "../services/product.service";
 import {Product} from "../models/product.model";
-import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {DomSanitizer, SafeUrl, Title} from "@angular/platform-browser";
 import {AuthService} from "../services/auth.service";
 import {NgForm} from "@angular/forms";
 import {CartService} from "../services/cart.service";
@@ -14,8 +14,7 @@ import {Stock} from "../models/stock.model";
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.css']
 })
-export class ProductPageComponent implements OnInit {
-
+export class ProductPageComponent implements OnInit{
 
 
   product: Product = {
@@ -45,35 +44,36 @@ export class ProductPageComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private cartService: CartService,
-    private toastr: ToastrService
-  ) {
+    private toastr: ToastrService,
+    private titleService: Title){
+    this.titleService.setTitle("Ecommerce | Product page");
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void{
     this.route.params.subscribe((routeParams) => {
       this.getProduct(routeParams['id']);
     });
     this.isLogged = this.authService.isLoggedIn();
   }
 
-  private getProduct(id: number): void {
+  private getProduct(id: number): void{
     this.productService.getProductStock(id).subscribe((stock) => {
       this.stock = stock
       this.product = stock.product;
     });
   }
 
-  public getSanitizeUrl(url: string): SafeUrl {
-    if (url !== "")
+  public getSanitizeUrl(url: string): SafeUrl{
+    if(url !== "")
       return this.sanitizer.bypassSecurityTrustUrl(url);
     else
       return "assets/images/placeholder.png";
   }
 
-  addToCart(form: NgForm): void {
-    if (form.value.amount == null || form.value.amount < 1 || form.value.amount > this.stock.amount) {
+  addToCart(form: NgForm): void{
+    if(form.value.amount == null || form.value.amount < 1 || form.value.amount > this.stock.amount){
       this.toastr.error("Fail!");
-    } else {
+    }else{
       this.cartService.addItemToCart(this.product.id, form.value.amount).subscribe(() => {
           this.toastr.success("Added to your shopping cart.");
         },
@@ -83,7 +83,7 @@ export class ProductPageComponent implements OnInit {
     }
   }
 
-  navigateToLoginPage(): void {
+  navigateToLoginPage(): void{
     this.router.navigate(['login']);
   }
 }

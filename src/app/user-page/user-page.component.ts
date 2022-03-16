@@ -5,6 +5,7 @@ import {NgForm} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {Invoice} from "../models/invoice.model";
 import {InvoiceService} from "../services/invoice.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-user-page',
@@ -26,7 +27,8 @@ export class UserPageComponent implements OnInit{
 
   createNewAddress = false;
 
-  constructor(private userService: UserService, private toastr: ToastrService, private invoiceService: InvoiceService){
+  constructor(private userService: UserService, private toastr: ToastrService, private invoiceService: InvoiceService, private titleService: Title){
+    this.titleService.setTitle("Ecommerce | User page");
   }
 
   ngOnInit(): void{

@@ -3,21 +3,23 @@ import {NgForm} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit{
 
-  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) {
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router, private titleService: Title){
+    this.titleService.setTitle("Ecommerce | Login");
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void{
   }
 
-  signInUser(form: NgForm): void {
+  signInUser(form: NgForm): void{
     this.authService.login(form).subscribe(
       () => {
         this.toastr.success("Success!");

@@ -5,13 +5,14 @@ import {ToastrService} from "ngx-toastr";
 import {UserService} from "../services/user.service";
 import {UserData} from "../models/userData.model";
 import {NgForm} from "@angular/forms";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-cart-page',
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.css']
 })
-export class CartPageComponent implements OnInit {
+export class CartPageComponent implements OnInit{
 
   cart: Cart = {
     updatedDate: new Date(),
@@ -32,20 +33,21 @@ export class CartPageComponent implements OnInit {
 
   buyStatus = false;
 
-  constructor(private cartService: CartService, private toastr: ToastrService, private userService: UserService) {
+  constructor(private cartService: CartService, private toastr: ToastrService, private userService: UserService, private titleService: Title){
+    this.titleService.setTitle("Ecommerce | Cart page");
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void{
     this.loadCartData();
   }
 
-  private loadCartData(): void {
+  private loadCartData(): void{
     this.cartService.getCartData().subscribe((cart) => {
       this.cart = cart;
     });
   }
 
-  deleteCartItem(id: number): void {
+  deleteCartItem(id: number): void{
     this.cartService.deleteCartItem(id).subscribe(() => {
       this.loadCartData()
     }, () => {
@@ -53,7 +55,7 @@ export class CartPageComponent implements OnInit {
     })
   }
 
-  clearCart(): void {
+  clearCart(): void{
     this.cartService.deleteAllCart().subscribe(() => {
       this.loadCartData()
     }, () => {
@@ -61,18 +63,18 @@ export class CartPageComponent implements OnInit {
     })
   }
 
-  changeBuyStatus(): void {
+  changeBuyStatus(): void{
     this.buyStatus = !this.buyStatus;
-    if (this.userData.login === "" && this.buyStatus) {
+    if(this.userData.login === "" && this.buyStatus){
       this.loadUserData();
     }
   }
 
-  loadUserData(): void {
+  loadUserData(): void{
     this.userService.getDataAboutCurrentUser().subscribe(userData => this.userData = userData);
   }
 
-  createOrder(form: NgForm): void {
+  createOrder(form: NgForm): void{
     this.cartService.createOrder(form).subscribe((res) => {
 
         this.loadUserData();

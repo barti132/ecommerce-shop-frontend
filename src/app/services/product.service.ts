@@ -3,8 +3,9 @@ import {Observable} from "rxjs";
 import {Product} from "../models/product.model";
 import {HttpClient} from "@angular/common/http";
 import {Stock} from "../models/stock.model";
+import {environment} from "../../environments/environment";
 
-const apiUrl = 'http://localhost:8080/api/v1/products/';
+const apiUrl = environment.address + 'products/';
 
 @Injectable({
   providedIn: 'root'

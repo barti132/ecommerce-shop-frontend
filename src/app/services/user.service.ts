@@ -4,8 +4,9 @@ import {UserData} from "../models/userData.model";
 import {HttpClient} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
 import {AuthService} from "./auth.service";
+import {environment} from "../../environments/environment";
 
-const apiUrl = 'http://localhost:8080/api/v1/user/';
+const apiUrl = environment.address + 'user/';
 
 @Injectable({
   providedIn: 'root'

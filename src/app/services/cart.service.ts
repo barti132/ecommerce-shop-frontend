@@ -4,8 +4,9 @@ import {AuthService} from "./auth.service";
 import {Observable} from "rxjs";
 import {Cart} from "../models/cart.model";
 import {NgForm} from "@angular/forms";
+import {environment} from "../../environments/environment";
 
-const apiUrl = 'http://localhost:8080/api/v1/cart/';
+const apiUrl = environment.address + 'cart/';
 
 @Injectable({
   providedIn: 'root'

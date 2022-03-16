@@ -3,8 +3,9 @@ import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable, tap} from "rxjs";
 import {LocalStorageService} from "ngx-webstorage";
+import {environment} from "../../environments/environment";
 
-const apiUrl = 'http://localhost:8080/api/v1/auth/';
+const apiUrl = environment.address + 'auth/';
 
 
 interface authRespond {
