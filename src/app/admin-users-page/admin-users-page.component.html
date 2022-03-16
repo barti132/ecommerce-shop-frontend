@@ -1,5 +1,35 @@
 <app-navbar></app-navbar>
 <main>
-  hello world
+  <div class="card me-5 ms-5 rounded">
+    <div class="card-header">
+      <b>User list:</b>
+    </div>
+    <table class="table table-striped card-body">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Email</th>
+        <th scope="col">Name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Role</th>
+        <th scope="col">Enabled</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let userData of usersData; let i = index" [attr.data-index]="i">
+        <th scope="row">{{i}}</th>
+        <td>{{userData.id}}</td>
+        <td>{{userData.email}}</td>
+        <td>{{userData.name}}</td>
+        <td>{{userData.lastName}}</td>
+        <td>{{userData.role}}</td>
+        <td *ngIf="userData.enabled"><i class="bi bi-check-lg"></i></td>
+        <td *ngIf="!userData.enabled"><i class="bi bi-x-lg"></i></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
 </main>
 <app-footer></app-footer>
