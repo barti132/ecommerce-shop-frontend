@@ -10,14 +10,15 @@ import {SearchPageComponent} from "./search-page/search-page.component";
 import {UserPageComponent} from "./user-page/user-page.component";
 import {CartPageComponent} from "./cart-page/cart-page.component";
 import {AdminUsersPageComponent} from "./admin-users-page/admin-users-page.component";
+import {AuthGuard} from "./services/auth.guard";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
-  {path: 'user', component: UserPageComponent},
+  {path: 'user', component: UserPageComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginPageComponent},
-  {path: 'cart', component: CartPageComponent},
+  {path: 'cart', component: CartPageComponent, canActivate: [AuthGuard]},
   {path: 'register', component: RegisterPageComponent},
-  {path: 'admin-users-page', component: AdminUsersPageComponent},
+  {path: 'admin-users-page', component: AdminUsersPageComponent, canActivate: [AuthGuard]},
   {path: 'category/:category', component: CategoryPageComponent},
   {path: 'product/:id', component: ProductPageComponent},
   {path: 'search/:category/:product', component: SearchPageComponent}
@@ -30,7 +31,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule {
 
