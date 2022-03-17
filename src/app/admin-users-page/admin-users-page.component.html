@@ -13,7 +13,8 @@
         <th scope="col">Name</th>
         <th scope="col">Last name</th>
         <th scope="col">Role</th>
-        <th scope="col">Enabled</th>
+        <th scope="col">Account status</th>
+        <th scope="col">Change status</th>
       </tr>
       </thead>
       <tbody>
@@ -24,8 +25,14 @@
         <td>{{userData.name}}</td>
         <td>{{userData.lastName}}</td>
         <td>{{userData.role}}</td>
-        <td *ngIf="userData.enabled"><i class="bi bi-check-lg"></i></td>
-        <td *ngIf="!userData.enabled"><i class="bi bi-x-lg"></i></td>
+        <td *ngIf="userData.enabled">Active</td>
+        <td *ngIf="!userData.enabled">Not active</td>
+        <td *ngIf="!userData.enabled">
+          <button class="btn btn-outline-dark" (click)="changeUserStatus(userData.id, true)"><i class="bi bi-check-lg"></i></button>
+        </td>
+        <td *ngIf="userData.enabled">
+          <button class="btn btn-outline-dark" (click)="changeUserStatus(userData.id, false)"><i class="bi bi-x-lg"></i></button>
+        </td>
       </tr>
       </tbody>
     </table>

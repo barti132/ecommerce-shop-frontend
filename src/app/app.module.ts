@@ -22,6 +22,8 @@ import {UserPageComponent} from './user-page/user-page.component';
 import {TokenInterceptor} from "./token-interceptor";
 import { CartPageComponent } from './cart-page/cart-page.component';
 import { AdminUsersPageComponent } from './admin-users-page/admin-users-page.component';
+import { AdminStockPageComponent } from './admin-stock-page/admin-stock-page.component';
+import { AdminNewProductPageComponent } from './admin-new-product-page/admin-new-product-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { AdminUsersPageComponent } from './admin-users-page/admin-users-page.com
     ProductsListComponent,
     UserPageComponent,
     CartPageComponent,
-    AdminUsersPageComponent
+    AdminUsersPageComponent,
+    AdminStockPageComponent,
+    AdminNewProductPageComponent
   ],
   imports: [
     BrowserModule,
