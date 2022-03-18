@@ -25,7 +25,8 @@ export class ProductPageComponent implements OnInit{
     description: "",
     img: "",
     priceNet: 0,
-    priceGross: 0
+    priceGross: 0,
+    available: true
   };
 
   stock: Stock = {
@@ -58,9 +59,15 @@ export class ProductPageComponent implements OnInit{
 
   private getProduct(id: number): void{
     this.productService.getProductStock(id).subscribe((stock) => {
-      this.stock = stock
-      this.product = stock.product;
-    });
+        this.stock = stock
+        this.product = stock.product;
+      },
+      () => {
+        this.productService.getProduct(id).subscribe((product) => {
+          this.product = product;
+          this.stock.amount = 0;
+        })
+      });
   }
 
   public getSanitizeUrl(url: string): SafeUrl{
