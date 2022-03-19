@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <main class="py-5">
   <div class="container px-4 px-lg-5 my-5">
-    <div class="row gx-4 gx-lg-5 align-items-center">
+    <div class="row gx-4 gx-lg-5 align-items-center" *ngIf="!editMode; else adminEditMode">
       <div class="col-md-6">
         <img class="card-img-top mb-5 mb-md-0" [src]=getSanitizeUrl(product.img) width="700" style="height: auto"
              alt="product"/>
@@ -36,8 +36,91 @@
             </ng-template>
           </form>
         </ng-template>
+        <div *ngIf="isAdmin">
+          <button class="btn btn-primary mt-2" (click)="changeEditMode()">Edit product</button>
+        </div>
       </div>
     </div>
+    <ng-template #adminEditMode>
+      <div class="row">
+        <div class="col-md-6">
+          <img class="card-img-top mb-5 mb-md-0" [src]=getSanitizeUrl(product.img) width="700" style="height: auto"
+               alt="product"/>
+          <label for="image" class="form-label mt-2">Choose image for product(Max 512kb)</label>
+          <input type="file"
+                 id="image"
+                 name="image"
+                 class="form-control"
+                 accept="image/jpeg"
+                 (change)="selectFiles($event)"
+                 required>
+          <button class="btn btn-primary mt-2" (click)="updateImage()">Update picture</button>
+        </div>
+        <div class="col-md-6">
+          <form #productUpdateForm="ngForm" (submit)="updateProduct(productUpdateForm)" ngNativeValidate>
+            <div>
+              <label for="name" class="form-label">Product name</label>
+              <input class="display-5 fw-bolder form-control"
+                     type="text"
+                     id="name"
+                     name="name"
+                     ngModel="{{product.name}}"
+                     required>
+            </div>
+            <div class="fs-5 mt-1 lead">Price gross: {{product.priceGross}} $</div>
+
+            <div>
+              <label for="priceNet" class="form-label">Product's price net</label>
+              <input class="fs-5 mb-3 form-control"
+                     type="number"
+                     id="priceNet"
+                     name="priceNet"
+                     ngModel="{{product.priceNet}}"
+                     required>
+            </div>
+            <div>
+              <label for="category" class="form-label">Select category</label>
+              <select class="form-select"
+                      aria-label="Select category"
+                      id="category"
+                      name="category"
+                      ngModel="{{product.category}}"
+                      required>
+                <option value="Laptops & PCs">Laptops & PCs</option>
+                <option value="Smartphones & Readers">Smartphones & Readers</option>
+                <option value="Printers & Ink">Printers & Ink</option>
+                <option value="Computer components">Computer components</option>
+                <option value="Computer Accessories">Computer Accessories</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="producerName" class="form-label">Producer name</label>
+              <input type="text" id="producerName" name="producerName" class="form-control" ngModel="{{product.producerName}}">
+            </div>
+
+            <div>
+              <label for="description" class="form-label">Product description</label>
+              <textarea id="description"
+                        name="description"
+                        class="form-control"
+                        rows="5"
+                        ngModel="{{product.description}}"
+                        required></textarea>
+            </div>
+
+            <div *ngIf="stock.amount == 0; else available">
+              <u>Product unavailable</u>
+            </div>
+            <ng-template #available>
+              <p>Available amount:  {{stock.amount}}</p>
+            </ng-template>
+            <button class="btn btn-primary me-2" (click)="changeEditMode()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </main>
 <app-footer class="mt-auto"></app-footer>

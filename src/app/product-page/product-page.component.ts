@@ -8,6 +8,7 @@ import {NgForm} from "@angular/forms";
 import {CartService} from "../services/cart.service";
 import {ToastrService} from "ngx-toastr";
 import {Stock} from "../models/stock.model";
+import {AdminService} from "../services/admin.service";
 
 @Component({
   selector: 'app-product-page',
@@ -15,7 +16,6 @@ import {Stock} from "../models/stock.model";
   styleUrls: ['./product-page.component.css']
 })
 export class ProductPageComponent implements OnInit{
-
 
   product: Product = {
     id: 0,
@@ -36,7 +36,11 @@ export class ProductPageComponent implements OnInit{
     updatedDate: new Date("")
   }
 
-  isLogged = false;
+  isLogged: boolean = false;
+  isAdmin: boolean = false;
+  editMode: boolean = false;
+
+  newImage: File;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +50,8 @@ export class ProductPageComponent implements OnInit{
     private router: Router,
     private cartService: CartService,
     private toastr: ToastrService,
-    private titleService: Title){
+    private titleService: Title,
+    private adminService: AdminService){
     this.titleService.setTitle("Ecommerce | Product page");
   }
 
@@ -55,6 +60,11 @@ export class ProductPageComponent implements OnInit{
       this.getProduct(routeParams['id']);
     });
     this.isLogged = this.authService.isLoggedIn();
+    this.isAdmin = this.authService.isAdmin();
+  }
+
+  changeEditMode(): void{
+    this.editMode = !this.editMode;
   }
 
   private getProduct(id: number): void{
@@ -96,5 +106,63 @@ export class ProductPageComponent implements OnInit{
 
   navigateToLoginPage(): void{
     this.router.navigate(['login']);
+  }
+
+  selectFiles(event: Event): void{
+    // @ts-ignore
+    this.newImage = event.target.files[0];
+    console.log(this.newImage.size)
+  }
+
+  updateImage(): void{
+    if(this.newImage != null && this.newImage.size < 513_000){
+      this.adminService.uploadImage(this.newImage).subscribe({
+        next: () => {
+          let productData = {
+            "name": this.product.name,
+            "priceNet": this.product.priceNet,
+            "category": this.product.category,
+            "producerName": this.product.producerName,
+            "description": this.product.description,
+            "imgName": this.newImage.name
+          };
+          this.adminService.updateProductData(this.product.id, productData).subscribe({
+            next: () => {
+              this.getProduct(this.product.id);
+              this.toastr.success("Changed image!");
+            },
+            error: () => {
+              this.toastr.error("Error");
+            }
+          });
+        },
+        error: () => {
+          this.toastr.error("Error upload image");
+        }
+      });
+    }else{
+      this.toastr.error("Image error");
+    }
+  }
+
+  updateProduct(productUpdateForm: NgForm): void{
+    let productData = {
+      "name": productUpdateForm.value.name,
+      "priceNet": productUpdateForm.value.priceNet,
+      "category": productUpdateForm.value.category,
+      "producerName": productUpdateForm.value.producerName,
+      "description": productUpdateForm.value.description,
+      "imgName": this.product.img
+    };
+    this.adminService.updateProductData(this.product.id, productData).subscribe({
+      next: () => {
+        this.getProduct(this.product.id);
+        this.changeEditMode();
+        this.toastr.success("Changed data!");
+      },
+      error: () => {
+        this.toastr.error("Error");
+      }
+    });
   }
 }

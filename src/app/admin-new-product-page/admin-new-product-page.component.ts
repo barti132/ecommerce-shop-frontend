@@ -11,7 +11,7 @@ import {ToastrService} from "ngx-toastr";
 })
 export class AdminNewProductPageComponent implements OnInit{
 
-  selectedFile: File;
+  image: File;
 
   constructor(private titleService: Title, private adminService: AdminService, private toastr: ToastrService){
     this.titleService.setTitle("Ecommerce | Add new product");
@@ -21,25 +21,31 @@ export class AdminNewProductPageComponent implements OnInit{
   }
 
   addNewProduct(productForm: NgForm): void{
-    this.adminService.uploadImage(this.selectedFile).subscribe({
-      next: () => {
-        this.adminService.addNewProduct(productForm, this.selectedFile.name).subscribe({
-          next: () => {
-            this.toastr.success("Added new product");
-          },
-          error: () => {
-            this.toastr.error("Product not added");
-          }
-        });
-      },
-      error: () => {
-        this.toastr.error("Upload image failed.");
-      }
-    })
+    if(this.image != null && this.image.size < 513_000){
+      this.adminService.uploadImage(this.image).subscribe({
+        next: () => {
+          this.adminService.addNewProduct(productForm, this.image.name).subscribe({
+            next: () => {
+              this.toastr.success("Added new product");
+            },
+            error: () => {
+              this.toastr.error("Product not added");
+            }
+          });
+        },
+        error: () => {
+          this.toastr.error("Upload image failed.");
+        }
+      });
+    }
+    else{
+      this.toastr.error("Wrong image size!");
+    }
   }
 
   selectFiles(event: Event){
     // @ts-ignore
-    this.selectedFile = event.target.files[0];
+    this.image = event.target.files[0];
+    console.log(this.image.size)
   }
 }

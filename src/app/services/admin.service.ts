@@ -54,12 +54,16 @@ export class AdminService{
       "description": productForm.value.description,
       "imgName": imageName
     }
-    return this.http.post(apiUrl + "products/new", productData);
+    return this.http.post(apiUrl + "products", productData);
   }
 
   uploadImage(image: File): Observable<Object>{
     const uploadData = new FormData();
     uploadData.append('image', image, image.name);
-    return this.http.post(apiUrl + "image/upload", uploadData);
+    return this.http.post(apiUrl + "image", uploadData);
+  }
+
+  updateProductData(id: number, productData: {imgName: string; producerName: string; name: string; description: string; category: string; priceNet: number}): Observable<Object>{
+    return this.http.put(apiUrl + "products/" + id, productData);
   }
 }
