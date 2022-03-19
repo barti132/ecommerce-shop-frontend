@@ -76,13 +76,11 @@ export class CartPageComponent implements OnInit{
 
   createOrder(form: NgForm): void{
     this.cartService.createOrder(form).subscribe((res) => {
-
-        this.loadUserData();
-        this.changeBuyStatus();
-
         const fileURL = URL.createObjectURL(new Blob([res], {type: 'application/pdf'}));
         window.open(fileURL, '_blank');
-        this.toastr.success("success");
+
+        this.cart.totalItems = 0;
+        this.changeBuyStatus();
       },
       (err) => {
         this.toastr.error("Error");

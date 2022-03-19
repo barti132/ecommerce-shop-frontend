@@ -44,4 +44,22 @@ export class AdminService{
     }
     return this.http.put(apiUrl + "stock/" + id, stockUpdateReq);
   }
+
+  addNewProduct(productForm: NgForm, imageName: string){
+    let productData = {
+      "category": productForm.value.category,
+      "producerName": productForm.value.producerName,
+      "name": productForm.value.name,
+      "priceNet": productForm.value.priceGross,
+      "description": productForm.value.description,
+      "imgName": imageName
+    }
+    return this.http.post(apiUrl + "products/new", productData);
+  }
+
+  uploadImage(image: File): Observable<Object>{
+    const uploadData = new FormData();
+    uploadData.append('image', image, image.name);
+    return this.http.post(apiUrl + "image/upload", uploadData);
+  }
 }

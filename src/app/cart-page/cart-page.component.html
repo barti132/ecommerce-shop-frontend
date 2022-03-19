@@ -6,7 +6,7 @@
   </div>
   <div class="card">
     <ul class="list-group align-items-center">
-      <div class="mt-4 mb-4" *ngIf="cart === null; else notNullCart">
+      <div class="mt-4 mb-4" *ngIf="cart === null || cart.totalItems == 0; else notNullCart">
         <h4>Your cart is empty.</h4>
       </div>
       <ng-template #notNullCart>

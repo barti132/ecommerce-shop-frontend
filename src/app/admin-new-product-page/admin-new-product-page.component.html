@@ -1,5 +1,51 @@
 <app-navbar></app-navbar>
 <main>
-  <p>admin-new-product-page works!</p>
+  <div class="card text-center">
+    <div class="card-header">
+      <h1>Add new product</h1>
+    </div>
+    <div class="card-body w-50 justify-content-center mx-auto">
+      <form #productForm="ngForm" (submit)="addNewProduct(productForm)" ngNativeValidate>
+        <div class="row">
+          <div class="mb-3 col">
+            <label for="image" class="form-label">Choose image for product(Max 512kb)</label>
+            <input type="file" id="image" name="image" class="form-control" accept="image/jpeg" (change)="selectFiles($event)" required>
+          </div>
+          <div class="mb-3 col">
+            <label for="category" class="form-label">Select category</label>
+            <select class="form-select" aria-label="Select category" id="category" name="category" ngModel="Laptops & PCs" required>
+              <option value="Laptops & PCs">Laptops & PCs</option>
+              <option value="Smartphones & Readers">Smartphones & Readers</option>
+              <option value="Printers & Ink">Printers & Ink</option>
+              <option value="Computer components">Computer components</option>
+              <option value="Computer Accessories">Computer Accessories</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-3 col">
+            <label for="producerName" class="form-label">Producer name</label>
+            <input type="text" id="producerName" name="producerName" class="form-control" ngModel required>
+          </div>
+          <div class="mb-3 col">
+            <label for="name" class="form-label">Product name</label>
+            <input type="text" id="name" name="name" class="form-control" ngModel required>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="priceGross" class="form-label">Product price net</label>
+          <input type="number" id="priceGross" name="priceGross" class="form-control" ngModel required>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Product description</label>
+          <textarea id="description" name="description" class="form-control" rows="5" ngModel required></textarea>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
 </main>
 <app-footer></app-footer>
