@@ -27,21 +27,25 @@ export class AdminStockPageComponent implements OnInit{
   }
 
   deleteStock(id: number): void{
-    this.adminService.deleteStock(id).subscribe(() => {
+    this.adminService.deleteStock(id).subscribe({
+      next: () => {
         this.loadStockData();
         this.toastr.success("Success");
       },
-      () => {
+      error: () => {
         this.toastr.error("Error");
-      });
+      }
+    });
   }
 
   updateAmount(id: number, amountForm: NgForm): void{
-    this.adminService.updateAmount(id, amountForm).subscribe(() => {
+    this.adminService.updateAmount(id, amountForm).subscribe({
+      next: () => {
         this.toastr.success("Success");
       },
-      () => {
+      error: () => {
         this.toastr.error("Error");
-      });
+      }
+    });
   }
 }

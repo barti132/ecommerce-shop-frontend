@@ -58,16 +58,18 @@ export class ProductPageComponent implements OnInit{
   }
 
   private getProduct(id: number): void{
-    this.productService.getProductStock(id).subscribe((stock) => {
+    this.productService.getProductStock(id).subscribe({
+      next: (stock) => {
         this.stock = stock
         this.product = stock.product;
       },
-      () => {
+      error: () => {
         this.productService.getProduct(id).subscribe((product) => {
           this.product = product;
           this.stock.amount = 0;
         })
-      });
+      }
+    });
   }
 
   public getSanitizeUrl(url: string): SafeUrl{
@@ -81,12 +83,14 @@ export class ProductPageComponent implements OnInit{
     if(form.value.amount == null || form.value.amount < 1 || form.value.amount > this.stock.amount){
       this.toastr.error("Fail!");
     }else{
-      this.cartService.addItemToCart(this.product.id, form.value.amount).subscribe(() => {
+      this.cartService.addItemToCart(this.product.id, form.value.amount).subscribe({
+        next: () => {
           this.toastr.success("Added to your shopping cart.");
         },
-        () => {
+        error: () => {
           this.toastr.error("Fail!");
-        })
+        }
+      });
     }
   }
 

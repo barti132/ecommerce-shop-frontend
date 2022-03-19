@@ -21,17 +21,21 @@ export class AdminNewProductPageComponent implements OnInit{
   }
 
   addNewProduct(productForm: NgForm): void{
-    this.adminService.uploadImage(this.selectedFile).subscribe(() => {
-        this.adminService.addNewProduct(productForm, this.selectedFile.name).subscribe(() => {
+    this.adminService.uploadImage(this.selectedFile).subscribe({
+      next: () => {
+        this.adminService.addNewProduct(productForm, this.selectedFile.name).subscribe({
+          next: () => {
             this.toastr.success("Added new product");
           },
-          () => {
+          error: () => {
             this.toastr.error("Product not added");
-          });
+          }
+        });
       },
-      () => {
+      error: () => {
         this.toastr.error("Upload image failed.");
-      })
+      }
+    })
   }
 
   selectFiles(event: Event){

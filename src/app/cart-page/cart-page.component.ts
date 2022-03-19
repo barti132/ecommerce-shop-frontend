@@ -42,25 +42,31 @@ export class CartPageComponent implements OnInit{
   }
 
   private loadCartData(): void{
-    this.cartService.getCartData().subscribe((cart) => {
-      this.cart = cart;
+    this.cartService.getCartData().subscribe({
+      next: (cart) => {
+        this.cart = cart;
+      }
     });
   }
 
   deleteCartItem(id: number): void{
-    this.cartService.deleteCartItem(id).subscribe(() => {
-      this.loadCartData()
-    }, () => {
-      this.toastr.error("Error")
-    })
+    this.cartService.deleteCartItem(id).subscribe({
+      next: () => {
+        this.loadCartData()
+      }, error: () => {
+        this.toastr.error("Error")
+      }
+    });
   }
 
   clearCart(): void{
-    this.cartService.deleteAllCart().subscribe(() => {
-      this.loadCartData()
-    }, () => {
-      this.toastr.error("Error")
-    })
+    this.cartService.deleteAllCart().subscribe({
+      next: () => {
+        this.loadCartData()
+      }, error: () => {
+        this.toastr.error("Error")
+      }
+    });
   }
 
   changeBuyStatus(): void{
@@ -75,17 +81,19 @@ export class CartPageComponent implements OnInit{
   }
 
   createOrder(form: NgForm): void{
-    this.cartService.createOrder(form).subscribe((res) => {
+    this.cartService.createOrder(form).subscribe({
+      next: (res) => {
         const fileURL = URL.createObjectURL(new Blob([res], {type: 'application/pdf'}));
         window.open(fileURL, '_blank');
 
         this.cart.totalItems = 0;
         this.changeBuyStatus();
       },
-      (err) => {
+      error: (err) => {
         this.toastr.error("Error");
         console.log(err)
-      });
+      }
+    });
   }
 
 }

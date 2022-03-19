@@ -21,17 +21,19 @@ export class AdminUsersPageComponent implements OnInit{
     this.loadUserDataList()
   }
 
-  loadUserDataList(): void {
+  loadUserDataList(): void{
     this.adminService.getUserDataForAdmin().subscribe((usersData) => this.usersData = usersData);
   }
 
   changeUserStatus(id: number, status: boolean): void{
-    this.adminService.changeUserStatus(id, status).subscribe(() => {
+    this.adminService.changeUserStatus(id, status).subscribe({
+      next: () => {
         this.toastr.success("Success");
         this.loadUserDataList();
       },
-      () => {
+      error: () => {
         this.toastr.error("Error")
-      });
+      }
+    });
   }
 }

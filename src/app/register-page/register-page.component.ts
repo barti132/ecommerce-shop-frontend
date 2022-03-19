@@ -22,14 +22,16 @@ export class RegisterPageComponent implements OnInit{
   registerUser(form: NgForm): void{
     if(form.value.password === form.value.passRep){
       this.authService.registerUser(form).subscribe(
-        (val) => {
-          this.toastr.success("Register successful. Please check your email, to active account. Redirect to login page in 5s.");
-          setTimeout(() => {
-            this.router.navigate(['login']);
-          }, 5000);
-        },
-        response => {
-          this.toastr.error("Register fail. " + response);
+        {
+          next: () => {
+            this.toastr.success("Register successful. Please check your email, to active account. Redirect to login page in 5s.");
+            setTimeout(() => {
+              this.router.navigate(['login']);
+            }, 5000);
+          },
+          error: (response) => {
+            this.toastr.error("Register fail. " + response);
+          }
         });
     }else{
       this.toastr.error("Passwords don't match");
