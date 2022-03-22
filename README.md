@@ -28,5 +28,5 @@ fully loaded the website
 ![page](/screenshots/front_4.png?raw=true)\
 ![page](/screenshots/front_5.png?raw=true)\
 ![page](/screenshots/front_6.png?raw=true)\
-![page](/screenshots/front_7.png?raw=true)\
+![page](/screenshots/front_7.png?raw=true)
 
