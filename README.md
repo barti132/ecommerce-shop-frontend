@@ -1,27 +1,32 @@
 # Ecommerce shop - frontend
-This frontend repository is part of my ecommerce shop project. This part based on Angular, communicate with java rest api to create a real Online shop.
+This frontend repository is part of my ecommerce shop project. In this module, I create Angular website 
+that communicate with rest API.
 
 ## Table of contents
 * [Description](#description)
+* [Preview](#preview)
 * [Technologies](#technologies)
-* [Usage](#usage)
 * [Screenshots](#screenshots)
 
 ## Description
-I am creating online shop, based on angular and spring boot. (Work in progess) 
+This is my second project in Angular. The main idea of this project is to create visualization for my 
+backend shop rest API. I used bootstrap for most of the pages.
+
+## Preview
+http://ecommerce.front.bartoszsredzinski.pl - deployed with heroku, you sometimes have to wait about 30s to
+fully loaded the website
 
 ## Technologies
 * Node.js(16.13.2+)
 * Angular
 * bootstrap 5
-* HTML + CSS
-
-## Usage
-You need nodejs 16.13.2 or higher
-> npm install  
-> ng serve  
-> navigate to `http://localhost:4200/`  
 
 ## Screenshots
-TO DO
+![page](/screenshots/front_1.png?raw=true)\
+![page](/screenshots/front_2.png?raw=true)\
+![page](/screenshots/front_3.png?raw=true)\
+![page](/screenshots/front_4.png?raw=true)\
+![page](/screenshots/front_5.png?raw=true)\
+![page](/screenshots/front_6.png?raw=true)\
+![page](/screenshots/front_7.png?raw=true)\
 
