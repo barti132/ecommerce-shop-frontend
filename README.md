@@ -4,17 +4,12 @@ that communicate with rest API.
 
 ## Table of contents
 * [Description](#description)
-* [Preview](#preview)
 * [Technologies](#technologies)
 * [Screenshots](#screenshots)
 
 ## Description
 This is my second project in Angular. The main idea of this project is to create visualization for my 
 backend shop rest API. I used bootstrap for most of the pages.
-
-## Preview
-http://ecommerce.front.bartoszsredzinski.pl - deployed with heroku, you sometimes have to wait about 30s to
-fully loaded the website
 
 ## Technologies
 * Node.js(16.13.2+)
